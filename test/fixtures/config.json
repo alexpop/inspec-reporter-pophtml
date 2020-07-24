@@ -1,0 +1,9 @@
+{
+  "version": "1.2",
+  "plugins": {
+    "inspec-reporter-pophtml": {
+      "alternate_js_file":"lib/plugins/inspec-reporter-pophtml/test/fixtures/alternate.js",
+      "alternate_css_file":"lib/plugins/inspec-reporter-pophtml/test/fixtures/alternate.css"
+    }
+  }
+}
