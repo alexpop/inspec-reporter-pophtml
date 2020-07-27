@@ -1,5 +1,5 @@
 body {
-  margin: 20px 10% 20px 10%;
+  margin: 20px 0% 20px 10%;
   padding: 0;
   background: #fff;
 }
@@ -9,6 +9,9 @@ h1, h2, h3, h4, h5 {
 h1, h2 {
   padding: 10px;
   text-align: center
+}
+h1 {
+  font-size: 1.5em;
 }
 table.info th, table.info th {
   padding: 2px;
@@ -56,6 +59,10 @@ pre code {
 .result-metadata .status-failed div {
   background-color: red;
 }
+.control-metadata .status-waived div,
+.result-metadata .status-waived div {
+  background-color: lightgrey;
+}
 .control-metadata .status-skipped div,
 .result-metadata .status-skipped div  {
   background-color: grey;
@@ -68,11 +75,21 @@ pre code {
 .selector-panel {
   position: fixed;
   z-index: 100;
-  background-color: #ccc;
+  background-color: #ecc;
   padding: 10px;
   top: 0;
   margin-left: -10%;
   border-bottom-right-radius: 10px;
+}
+
+.selector-checkbox-span {
+  display: block;
+}
+
+#selector-instructions {
+  font-weight: bold;
+  margin-top: 0.6em;
+  margin-bottom: 0.2em;
 }
 
 @media print {
@@ -85,7 +102,7 @@ pre code {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 5px auto;
-  width: fit-content
+  width: fit-content;
 }
 
 .inspec-summary h4 {

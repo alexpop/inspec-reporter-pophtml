@@ -1,15 +1,9 @@
-<% slugged_id = control.id.tr(" ", "_") %>
 <%
-    # Determine status of control
-    status = "passed"
-    if control.results.any? { |r| r.status == "failed" }
-      status = "failed"
-    elsif control.results.any? { |r| r.status == "skipped" }
-      status = "skipped"
-    end
+  slugged_id = control.id.tr(" ", "_")
+  control_status = status(control)
 %>
 
-<div class="control control-status-<%= status %>" id="control-<%= slugged_id %>">
+<div class="control control-status-<%= control_status %>" id="control-<%= slugged_id %>">
 
   <%
     # Determine range of impact
@@ -26,7 +20,7 @@
 
   <h3 class="control-title">Control <code><%= control.id %></code></h3>
   <table class="control-metadata info" id="control-metadata-<%= slugged_id %>">
-    <tr class="status status-<%= status %>"><th>Status:</th><td><div><%= status.capitalize %></div></td></tr>
+    <tr class="status status-<%= control_status %>"><th>Status:</th><td><div><%= control_status.capitalize %></div></td></tr>
     <% if control.title %><tr class="title"><th>Title:</th><td><%= control.title %></td></tr> <% end %>
     <% if control.desc %><tr class="desc"><th>Description:</th><td><%= control.desc %></td></tr> <% end %>
     <% if control.impact %><tr class="impact impact-<%= impact_level %>"><th>Impact:</th><td><%= control.impact %></td></tr> <% end %>

@@ -1,8 +1,19 @@
 <div class="selector-panel">
-  <p id="selector-instructions">Display controls that are:</p>
-  <input class="selector-checkbox" id="passed-checkbox" type="checkbox" checked="checked"/><label for="passed-checkbox">Passed</label>
-  <input class="selector-checkbox" id="skipped-checkbox" type="checkbox" checked="checked"/><label for="skipped-checkbox">Skipped</label>
-  <input class="selector-checkbox" id="failed-checkbox" type="checkbox" checked="checked"/><label for="failed-checkbox">Failed</label>
-  <p id="selector-instructions">Display profiles that are:</p>
-  <input class="profile-selector-checkbox" id="child-profile-checkbox" type="checkbox" /><label for="child-profile-checkbox">Dependent Profiles</label>
+  <p id="selector-instructions">Display controls:</p>
+  <span class="selector-checkbox-span">
+    <input class="selector-checkbox" id="passed-checkbox" type="checkbox" checked="checked"/><label for="passed-checkbox">Passed (<%= control_sums['passed'] %>)</label>
+  </span>
+  <span class="selector-checkbox-span">
+    <input class="selector-checkbox" id="skipped-checkbox" type="checkbox" checked="checked"/><label for="skipped-checkbox">Skipped (<%= control_sums['skipped'] %>)</label>
+  </span>
+  <span class="selector-checkbox-span">
+    <input class="selector-checkbox" id="failed-checkbox" type="checkbox" checked="checked"/><label for="failed-checkbox">Failed (<%= control_sums['failed'] %>)</label>
+  </span>
+  <span class="selector-checkbox-span">
+    <input class="selector-checkbox" id="waived-checkbox" type="checkbox" checked="checked"/><label for="waived-checkbox">Waived (<%= control_sums['waived'] %>)</label>
+  </span>
+  <p id="selector-instructions">Display profile:</p>
+  <span class="profile-selector-checkbox-span">
+    <input class="profile-selector-checkbox" id="child-profile-checkbox" type="checkbox" /><label for="child-profile-checkbox">Dependencies</label>
+  </span>
 </div>
