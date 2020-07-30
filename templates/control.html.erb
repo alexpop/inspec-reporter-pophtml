@@ -50,10 +50,10 @@
       </tr>
     <% end %>
     <tr class="code">
-      <th>Source Code:</th>
+      <th>Code:</th>
       <td>
-        <input type="button" class="show-source-code" id="show-code-<%= slugged_id %>" value="Show Source"/>
-        <input type="button" class="hide-source-code hidden" id="hide-code-<%= slugged_id %>" value="Hide Source"/>
+        <input type="button" class="show-source-code" id="show-code-<%= slugged_id %>" value="Show Source Source"/>
+        <input type="button" class="hide-source-code hidden" id="hide-code-<%= slugged_id %>" value="Hide Source Source"/>
         <pre class="source-code hidden" id="source-code-<%= slugged_id %>">
           <code><%= control.code %></code>
         </pre>
@@ -63,8 +63,11 @@
 
   </table>
 
-  <% control.results.each do |result| %>
-    <%= ERB.new(File.read(template_path + "/result.html.erb"), nil, nil, "_rslt").result(binding)  %>
+  <% if control.results.length > 0 %>
+    <h4 class="results-label">Results:</h4>
+    <% control.results.each do |result| %>
+      <%= ERB.new(File.read(template_path + "/result.html.erb"), nil, nil, "_rslt").result(binding)  %>
+    <% end %>
   <% end %>
 
 </div>

@@ -32,7 +32,7 @@ pre code {
 }
 
 .profile {
-  border: 2px solid #ccc;
+  border: 2px solid #ddd;
   padding-left: 10px;
   margin: 5px 5px 5px auto;
   border-radius: 8px;
@@ -46,9 +46,9 @@ pre code {
 }
 
 .control {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 5px auto;
+  border: 1px solid #ddd;
+  padding: 8px 10px 10px 10px;
+  margin: 0px 0px 10px 15px;
   border-radius: 6px;
 }
 
@@ -58,10 +58,11 @@ pre code {
 
 .profile-metadata {
   padding: 10px;
+  width: 100%;
 }
 
 .resource-title {
-  margin-left: 2.5%;
+  margin: 0px 0px 0px 2.5%;
 }
 
 .control-title code, .resource-title code {
@@ -110,10 +111,17 @@ pre code {
   padding-right: 5px;
 }
 
-.result-metadata,
 .control-metadata {
   margin: 0 0 0 5%;
 }
+
+.result-metadata {
+  margin: 5px 0 10px 2%;
+  border-top: 1px solid #eee;
+  width: 80%
+}
+
+
 
 .selector-panel {
   position: fixed;
@@ -167,6 +175,10 @@ pre code {
 #statistics-label, #platform-label {
   text-align: left;
   margin-block-start: 0.3em;
+}
+
+.results-label {
+  margin: 10px 0px 15px 10px;
 }
 
 #inspec-version {
