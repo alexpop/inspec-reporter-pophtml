@@ -176,10 +176,6 @@ pre code {
   margin-block-start: 0.3em;
 }
 
-.results-label {
-  margin: 20px 0px 15px 10px;
-}
-
 #report-time {
   display: none;   /* Initially until we convert it to the browser timezone */
 }
@@ -218,8 +214,24 @@ pre code {
 /* thl classes in result classes */
 .result .thl {
   width: 6em;
+  font-size: 14px;
 }
 
 .result {
   margin: 0 0 20px 25px;
+}
+
+.controls-label {
+  color: blue;
+}
+.controls-label:hover {
+  cursor: pointer;
+}
+
+.results-label {
+  color: blue;
+  margin: 20px 0px 15px 10px;
+}
+.results-label:hover {
+  cursor: pointer;
 }
