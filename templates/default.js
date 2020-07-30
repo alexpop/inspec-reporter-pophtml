@@ -1,3 +1,5 @@
+var expanded_char = '▼';
+var collapsed_char = '▶';
 
 /* CSS primitives */
 function addCssClass(id, cls) {
@@ -53,6 +55,28 @@ function handleChildProfileChange(evt) {
       addCssClass(child_profiles[i].id, "hidden")
     }
   }
+}
+
+String.prototype.replaceAt = function(index, replacement) {
+  return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
+
+function controlsClicked(event) {
+  var selectors = document.querySelectorAll('.'+event.id);
+  console.log(event.id + ' has ' + selectors.length + ' controls, collapsing...');
+  var controls_label = event.innerText;
+  if (controls_label[0] == expanded_char) {
+    for (i = 0; i < selectors.length; i++) {
+      selectors[i].style.display = "none";
+    }
+    controls_label = controls_label.replaceAt(0, collapsed_char);
+  } else {
+    for (i = 0; i < selectors.length; i++) {
+      selectors[i].style.display = "block";
+    }
+    controls_label = controls_label.replaceAt(0, expanded_char);
+  }
+  event.innerText = controls_label;
 }
 
 /* Main entry point */

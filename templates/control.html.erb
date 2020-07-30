@@ -3,7 +3,7 @@
   control_status = status(control)
 %>
 
-<div class="control control-status-<%= control_status %>" id="control-<%= slugged_id %>">
+<div class="control control-status-<%= control_status %> controls-<%= profile.sha256 %>" id="control-<%= slugged_id %>">
 
   <%
     # Determine range of impact

@@ -4,7 +4,7 @@ body {
   background: #fff;
 }
 h1, h2, h3, h4, h5 {
-  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-family: "Avenir Next W01", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 h1, h2 {
   padding: 10px;

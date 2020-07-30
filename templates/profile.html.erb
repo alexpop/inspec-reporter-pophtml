@@ -21,7 +21,7 @@
     <% if profile.controls.length > 0 %>
       <tr class="profile-controls">
         <td colspan="2">
-          <h3 class="controls-label">Controls (<%= profile.controls.length %>):</h3>
+          <h3 class="controls-label" id="controls-<%= profile.sha256 %>" onclick="controlsClicked(this)">▼ Controls (<%= profile.controls.length %>):</h3>
           <% profile.controls.each do |control| %>
             <%= ERB.new(File.read(template_path + "/control.html.erb"), nil, nil, "_ctl").result(binding)  %>
           <% end %>
