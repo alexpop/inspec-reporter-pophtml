@@ -77,7 +77,6 @@ pre code {
 }
 
 .control-metadata .status div, .result-metadata .status div {
-  color: white;
   width: fit-content;
   padding: 0px 2px;
 }
@@ -181,8 +180,33 @@ pre code {
   margin: 10px 0px 15px 10px;
 }
 
+#report-time {
+  display: none;   /* Initially until we convert it to the browser timezone */
+}
+
 #inspec-version {
   display: block;
   text-align: center;
   font-style: italic;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: black;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

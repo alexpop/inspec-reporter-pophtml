@@ -76,4 +76,9 @@ function  pageLoaded() {
   }
   // wire up child profile checkbox
   document.getElementById("child-profile-checkbox").onchange = handleChildProfileChange;
+  report_time = document.getElementById("report-time");
+  var utc_date = new Date(report_time.textContent);
+  var tz = new Date().toString().split(" ")[5];
+  report_time.textContent = utc_date.toLocaleString() + '  ' + tz;
+  report_time.style.display = "inline";
 }

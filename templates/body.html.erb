@@ -23,23 +23,28 @@
 
     <div class="inspec-summary">
       <table id="statistics" class="info">
-        <tr><th colspan="2"><h4 id="statistics-label">Control Statistics</h4></th></tr>
+        <tr><th colspan="2"><h4 id="statistics-label"><div class="tooltip">Control Statistics<span class="tooltiptext">A summary of all the controls in the report based on their results status.</span></div></h4></th></tr>
         <tr class="failed"><th><span class="status-failed">Failed:</span></th><td><b><%= report_extras['sums']['failed'] %></b></td></tr>
         <tr class="passed"><th><span class="status-passed">Passed:</span></th><td><b><%= report_extras['sums']['passed'] %></b></td></tr>
         <tr class="skipped"><th><span class="status-skipped">Skipped:</span></th><td><b><%= report_extras['sums']['skipped'] %></b></td></tr>
         <tr class="waived"><th><span class="status-waived">Waived:</span></th><td><b><%= report_extras['sums']['waived'] %></b></td></tr>
-        <tr><th id="overall-status">Overall Status:</th><td><b><span class="status-<%= report_extras['status'] %>"><%= report_extras['status'].capitalize %></span></b></td></tr>
+        <tr><th id="overall-status">
+          <div class="tooltip">Overall Status<span class="tooltiptext">The overall status of the report taking into account the status of the profiles and controls that ran or that have been waived (ignored).</span></div>:</th><td><b><span class="status-<%= report_extras['status'] %>"><%= report_extras['status'].capitalize %></span></b></td></tr>
         <!-- Not including for now until it's accurate -->
         <!-- <tr class= "duration"><th>Duration:</th><td><%= run_data.statistics.duration %> seconds</td></tr> -->
       </table>
 
       <table id="platform" class="info">
         <tr><th colspan=2><h4 id="platform-label">Platform Information</h4></th></tr>
-        <tr class= "name"><th>Name:</th><td><%= run_data.platform.name %></td></tr>
-        <tr class= "release"><th>Release:</th><td><%= run_data.platform.release %></td></tr>
-        <tr class= "target"><th>Target:</th><td><%= run_data.platform.target %></td></tr>
-        <tr class= "date"><th>Time:</th><td><%= Time.now.utc %></td></tr>
-        <tr class= "version"><th><%= Inspec::Dist::PRODUCT_NAME.gsub(/Chef\s*/, "") %>:</th><td>v<%= run_data.version %></td></tr>
+        <tr class= "name"><th><div class="tooltip">Name<span class="tooltiptext">The codename of the platform identified as the target of this report.</span></div>:</th><td><%= run_data.platform.name %></td></tr>
+        <tr class= "release"><th><div class="tooltip">Release<span class="tooltiptext">The version of the platform identified as the target of this report.</span></div>:</th><td><%= run_data.platform.release %></td></tr>
+        <tr class= "target"><th><div class="tooltip">Target<span class="tooltiptext">The target of this report. This can be local machine, a remote server, a could account, etc.</span></div>:</th><td><%= run_data.platform.target %></td></tr>
+        <tr class= "date">
+          <th>
+            <div class="tooltip">Time<span class="tooltiptext">The date and time when the report finished.</span></div>:
+          </th><td><span id="report-time"><%= Time.now.utc.to_datetime.rfc3339 %></span></td>
+        </tr>
+        <tr class= "version"><th><div class="tooltip"><%= Inspec::Dist::PRODUCT_NAME.gsub(/Chef\s*/, "") %><span class="tooltiptext">The version of <%= Inspec::Dist::PRODUCT_NAME %> that was used to create this report.</span></div>:</th><td>v<%= run_data.version %></td></tr>
       </table>
     </div>
 
