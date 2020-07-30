@@ -26,13 +26,17 @@
     <% end %>
   </code></h3>
   <table class="control-metadata info" id="control-metadata-<%= slugged_id %>">
-    <tr class="control-id"><th><div class="tooltip">Id<span class="tooltiptext">The unique control id within this profile.</span></div>:</th><td><%= control.id %></td></tr>
-    <tr class="status"><th><div class="tooltip">Status<span class="tooltiptext">The overall status of the control taking into account the status of its results and any waivers (ignore conditions) applied for it.</span></div>:</th><td><b><span class="status-<%= control_status %>"><%= control_status.capitalize %></span></b></td></tr>
-    <% if control.desc %><tr class="desc"><th>Description:</th><td><%= control.desc %></td></tr> <% end %>
-    <% if control.impact %><tr class="impact impact-<%= impact_level %>"><th><div class="tooltip">Impact<span class="tooltiptext">The criticality of the control expressed as a number between 0.0 and 1.0, with a value &lt; 0.4 being considered 'LOW', a value &lt; 0.7 being considered 'MEDIUM' otherwise 'HIGH'.</span></div>:</th><td><%= control.impact %></td></tr> <% end %>
+    <tr class="control-id"><th class="thl"><div class="tooltip">Id<span class="tooltiptext">The unique control id within this profile.</span></div>:</th><td><%= control.id %></td></tr>
+    <tr class="status"><th class="thl"><div class="tooltip">Status<span class="tooltiptext">The overall status of the control taking into account the status of its results and any waivers (ignore conditions) applied for it.</span></div>:</th><td><b><span class="status-<%= control_status %>"><%= control_status.capitalize %></span></b></td></tr>
+    <% if control.desc %>
+      <tr class="desc"><th class="thl"><div class="tooltip">Desc.<span class="tooltiptext">The description of the control as defined in the profile.</span></div>:</th><td><%= control.desc %></td></tr>
+    <% end %>
+    <% if control.impact %>
+      <tr class="impact impact-<%= impact_level %>"><th class="thl"><div class="tooltip">Impact<span class="tooltiptext">The criticality of the control expressed as a number between 0.0 and 1.0, with a value &lt; 0.4 being considered 'LOW', a value &lt; 0.7 being considered 'MEDIUM' otherwise 'HIGH'.</span></div>:</th><td><%= control.impact %></td></tr>
+    <% end %>
     <% unless control.tags.empty? %>
       <tr class="tags">
-        <th>Tags:</th>
+        <th class="thl">Tags:</th>
         <td>
           <table class="tags">
             <% control.tags.each do |tag_name, tag_text| %>
@@ -44,7 +48,7 @@
     <% end %>
     <% unless control.refs.empty? %>
       <tr class="refs">
-        <th>References:</th>
+        <th class="thl">References:</th>
         <td>
           <ul>
           <% control.refs.each do |r| %>
@@ -55,7 +59,7 @@
       </tr>
     <% end %>
     <tr class="code">
-      <th>Code:</th>
+      <th class="thl"><tr class="desc"><th class="thl"><div class="tooltip">Code<span class="tooltiptext">The source code of the control as defined in the profile.</span></div>:</th>
       <td>
         <input type="button" class="show-source-code" id="show-code-<%= slugged_id %>" value="Show Source Source"/>
         <input type="button" class="hide-source-code hidden" id="hide-code-<%= slugged_id %>" value="Hide Source Source"/>
