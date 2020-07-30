@@ -1,16 +1,16 @@
 <div class="selector-panel">
   <p id="selector-instructions">Display controls:</p>
   <span class="selector-checkbox-span">
-    <input class="selector-checkbox" id="passed-checkbox" type="checkbox" checked="checked"/><label for="passed-checkbox">Passed (<%= control_sums['passed'] %>)</label>
+    <input class="selector-checkbox" id="failed-checkbox" type="checkbox" checked="checked"/><label for="failed-checkbox">Failed (<%= report_extras['sums']['failed'] %>)</label>
   </span>
   <span class="selector-checkbox-span">
-    <input class="selector-checkbox" id="skipped-checkbox" type="checkbox" checked="checked"/><label for="skipped-checkbox">Skipped (<%= control_sums['skipped'] %>)</label>
+    <input class="selector-checkbox" id="passed-checkbox" type="checkbox" checked="checked"/><label for="passed-checkbox">Passed (<%= report_extras['sums']['passed'] %>)</label>
   </span>
   <span class="selector-checkbox-span">
-    <input class="selector-checkbox" id="failed-checkbox" type="checkbox" checked="checked"/><label for="failed-checkbox">Failed (<%= control_sums['failed'] %>)</label>
+    <input class="selector-checkbox" id="skipped-checkbox" type="checkbox" checked="checked"/><label for="skipped-checkbox">Skipped (<%= report_extras['sums']['skipped'] %>)</label>
   </span>
   <span class="selector-checkbox-span">
-    <input class="selector-checkbox" id="waived-checkbox" type="checkbox" checked="checked"/><label for="waived-checkbox">Waived (<%= control_sums['waived'] %>)</label>
+    <input class="selector-checkbox" id="waived-checkbox" type="checkbox" checked="checked"/><label for="waived-checkbox">Waived (<%= report_extras['sums']['waived'] %>)</label>
   </span>
   <p id="selector-instructions">Display profile:</p>
   <span class="profile-selector-checkbox-span">

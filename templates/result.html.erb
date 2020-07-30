@@ -3,7 +3,7 @@
   <h4 class="resource-title">Resource <code><%= result.resource_title.to_s %></code></h4>
   <table class="result-metadata info">
     <tr class="expectation_message"><th>Test:</th><td><code><%= result.expectation_message %></code></td></tr>
-    <tr class="status status-<%= result.status %>"><th>Status:</th><td><div><%= result.status.capitalize %></div></td></tr>
+    <tr class="status"><th>Status:</th><td><div class="status-<%= result.status %>"><%= result.status.capitalize %></div></td></tr>
     <% if result.status == "failed" %>
     <tr class="fail_message"><th>Failure Message:</th><td><code><%= result.message %></code></td></tr>
     <% end %>

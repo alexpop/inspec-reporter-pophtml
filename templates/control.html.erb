@@ -18,9 +18,10 @@
     end
   %>
 
-  <h3 class="control-title">Control <code><%= control.id %></code></h3>
+  <h3 class="control-title"><code><%= control.title %></code></h3>
   <table class="control-metadata info" id="control-metadata-<%= slugged_id %>">
-    <tr class="status status-<%= control_status %>"><th>Status:</th><td><div><%= control_status.capitalize %></div></td></tr>
+    <tr class="control-id"><th>Id:</th><td><%= control.id %></td></tr>
+    <tr class="status"><th>Status:</th><td><b><span class="status-<%= control_status %>"><%= control_status.capitalize %></span></b></td></tr>
     <% if control.title %><tr class="title"><th>Title:</th><td><%= control.title %></td></tr> <% end %>
     <% if control.desc %><tr class="desc"><th>Description:</th><td><%= control.desc %></td></tr> <% end %>
     <% if control.impact %><tr class="impact impact-<%= impact_level %>"><th>Impact:</th><td><%= control.impact %></td></tr> <% end %>
@@ -54,9 +55,7 @@
         <input type="button" class="show-source-code" id="show-code-<%= slugged_id %>" value="Show Source"/>
         <input type="button" class="hide-source-code hidden" id="hide-code-<%= slugged_id %>" value="Hide Source"/>
         <pre class="source-code hidden" id="source-code-<%= slugged_id %>">
-          <code>
-<%= control.code %>
-          </code>
+          <code><%= control.code %></code>
         </pre>
       </td>
     </tr>

@@ -19,25 +19,28 @@
   <body onload="pageLoaded()">
     <%= ERB.new(File.read(template_path + "/selector.html.erb"), nil, nil, "_select").result(binding)  %>
     <div class="inspec-report">
-    <h1><%= Inspec::Dist::PRODUCT_NAME %> report <code><%= report_uuid %></code></h1>
+    <h1><%= Inspec::Dist::PRODUCT_NAME %> report <span class="status-<%= report_extras['status'] %>"><code><%= report_extras['uuid'] %></code></span></h1>
 
     <div class="inspec-summary">
+      <table id="statistics" class="info">
+        <tr><th colspan="2"><h4 id="statistics-label">Control Statistics</h4></th></tr>
+        <tr class="failed"><th><span class="status-failed">Failed:</span></th><td><b><%= report_extras['sums']['failed'] %></b></td></tr>
+        <tr class="passed"><th><span class="status-passed">Passed:</span></th><td><b><%= report_extras['sums']['passed'] %></b></td></tr>
+        <tr class="skipped"><th><span class="status-skipped">Skipped:</span></th><td><b><%= report_extras['sums']['skipped'] %></b></td></tr>
+        <tr class="waived"><th><span class="status-waived">Waived:</span></th><td><b><%= report_extras['sums']['waived'] %></b></td></tr>
+        <tr><th id="overall-status">Overall Status:</th><td><b><span class="status-<%= report_extras['status'] %>"><%= report_extras['status'].capitalize %></span></b></td></tr>
+        <!-- Not including for now until it's accurate -->
+        <!-- <tr class= "duration"><th>Duration:</th><td><%= run_data.statistics.duration %> seconds</td></tr> -->
+      </table>
+
       <table id="platform" class="info">
         <tr><th colspan=2><h4 id="platform-label">Platform Information</h4></th></tr>
         <tr class= "name"><th>Name:</th><td><%= run_data.platform.name %></td></tr>
         <tr class= "release"><th>Release:</th><td><%= run_data.platform.release %></td></tr>
         <tr class= "target"><th>Target:</th><td><%= run_data.platform.target %></td></tr>
+        <tr class= "date"><th>Time:</th><td><%= Time.now.utc %></td></tr>
+        <tr class= "version"><th><%= Inspec::Dist::PRODUCT_NAME.gsub(/Chef\s*/, "") %>:</th><td>v<%= run_data.version %></td></tr>
       </table>
-      <table id="statistics" class="info">
-        <tr><th colspan="2"><h4 id="statistics-label">Control Statistics</h4></th></tr>
-        <tr class= "passed"><th>Passed:</th><td><%= control_sums['passed'] %></td></tr>
-        <tr class= "skipped"><th>Skipped:</th><td><%= control_sums['skipped'] %></td></tr>
-        <tr class= "failed"><th>Failed:</th><td><%= control_sums['failed'] %></td></tr>
-        <tr class= "waived"><th>Waived:</th><td><%= control_sums['waived'] %></td></tr>
-        <tr class= "duration"><th>Duration:</th><td><%= run_data.statistics.duration %> seconds</td></tr>
-        <tr class= "date"><th>Time Finished:</th><td><%= Time.now %></td></tr>
-      </table>
-      <span id="inspec-version"><%= Inspec::Dist::PRODUCT_NAME %> version <%= run_data.version %></span>
     </div>
 
     <% run_data.profiles.each do |profile| %>

@@ -13,12 +13,14 @@ h1, h2 {
 h1 {
   font-size: 1.5em;
 }
+
 table.info th, table.info th {
   padding: 2px;
 }
 table.info th {
   text-align: right;
 }
+
 .hidden {
   display: none;
 }
@@ -29,44 +31,85 @@ pre code {
   padding: 20px;
 }
 
-.profile, .control, .profile-metadata {
+.profile {
+  border: 2px solid #ccc;
+  padding-left: 10px;
+  margin: 5px 5px 5px auto;
+  border-radius: 8px;
+}
+
+.profile-title {
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  margin: 0px;
+  margin: 6px 50px 0px 0px;
+}
+
+.control {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 5px auto;
+  border-radius: 6px;
+}
+
+.controls_label {
+  text-align: left;
+}
+
+.profile-metadata {
+  padding: 10px;
 }
 
 .resource-title {
   margin-left: 2.5%;
 }
 
-.control-title code,
-.resource-title code {
+.control-title code, .resource-title code {
   font-size: larger;
 }
-.control-metadata .status div,
-.result-metadata .status div {
+
+.control-title {
+  text-align: left;
+  /* border-bottom: 1px solid #ccc; */
+  margin: 0px;
+  margin: 0px 50px 12px 0px;
+}
+
+.control-metadata .status div, .result-metadata .status div {
   color: white;
-  font-weight: bold;
   width: fit-content;
   padding: 0px 2px;
 }
 
-.control-metadata .status-passed div,
-.result-metadata .status-passed div  {
+.status-passed {
+  color: white;
   background-color: darkgreen;
+  padding: 2px 4px 2px 4px;
+  border-radius: 3px;
 }
-.control-metadata .status-failed div,
-.result-metadata .status-failed div {
+.status-failed {
+  color: white;
   background-color: red;
+  padding: 2px 4px 2px 4px;
+  border-radius: 3px;
 }
-.control-metadata .status-waived div,
-.result-metadata .status-waived div {
-  background-color: lightgrey;
-}
-.control-metadata .status-skipped div,
-.result-metadata .status-skipped div  {
+.status-waived {
+  color: white;
   background-color: grey;
+  padding: 2px 4px 2px 4px;
+  border-radius: 3px;
 }
+.status-skipped {
+  color: white;
+  background-color: #969341;
+  padding: 2px 4px 2px 4px;
+  border-radius: 3px;
+}
+
+#overall-status {
+  padding-right: 5px;
+}
+
 .result-metadata,
 .control-metadata {
   margin: 0 0 0 5%;
@@ -99,10 +142,10 @@ pre code {
 }
 
 .inspec-summary {
-  border: 1px solid #ccc;
+  border: 3px solid #ccc;
   padding: 10px;
-  margin: 5px auto;
-  width: fit-content;
+  margin: 5px 5px 15px auto;
+  border-radius: 8px;
 }
 
 .inspec-summary h4 {
@@ -113,8 +156,17 @@ pre code {
   display: inline;
 }
 
+.inspec-summary #statistics {
+  padding-right: 100px;
+}
+
 #statistics .date td {
-  width: 100px
+  width: 180px;
+}
+
+#statistics-label, #platform-label {
+  text-align: left;
+  margin-block-start: 0.3em;
 }
 
 #inspec-version {

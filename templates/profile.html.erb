@@ -1,20 +1,33 @@
 <div class="profile <%= profile.parent_profile ? "child-profile hidden" : "" %>" id="profile-<%= profile.name %>">
   <% display_name = profile.title || profile.name %>
-  <h2 class="profile_title">Profile <%= display_name %> (<%= profile.name %>)</h2>
+  <h2 class="profile-title">Profile <%= display_name %></h2>
 
   <table class="profile-metadata info" id="profile-metadata-<%= profile.name %>">
+    <tr class="profile-name"><th>Name:</th><td><%= profile.name %></td></tr>
     <tr class="profile-version"><th>Version:</th><td><%= profile.version %></td></tr>
+    <tr class="profile-sha256"><th>SHA-256:</th><td><%= profile.sha256 %></td></tr>
     <% if profile.summary %>
     <tr class="profile-summary"><th>Summary:</th><td><%= profile.summary %></td></tr>
     <% end %>
-    <% if profile.skip_message %>
-    <tr class="profile-skip-message"><th>Skip Message:</th><td><%= profile.skip_message %></td></tr>
+    <tr class="profile-summary"><th>Status:</th><td><b><span class="status-<%= report_extras['profiles'][profile.sha256]['status'] %>"><%= report_extras['profiles'][profile.sha256]['status'].capitalize %></span></b></td></tr>
+    <% if profile.status == 'skipped' && profile.status_message %>
+    <tr class="profile-skip-message"><th><span class="status-skipped">Skip Message:</span></th><td><%= profile.status_message %></td></tr>
+    <% end %>
+    <% if profile.status == 'failed' && profile.status_message %>
+    <tr class="profile-fail-message"><th><span class="status-failed">Fail Message:</span></th><td><%= profile.status_message %></td></tr>
+    <% end %>
+
+
+    <% if profile.controls.length > 0 %>
+      <tr class="profile-controls">
+        <td colspan="2">
+          <h3 class="controls-label">Controls:</h3>
+          <% profile.controls.each do |control| %>
+            <%= ERB.new(File.read(template_path + "/control.html.erb"), nil, nil, "_ctl").result(binding)  %>
+          <% end %>
+        </td>
+      </tr>
     <% end %>
   </table>
 
-  <% if profile.status == "loaded" %>
-    <% profile.controls.each do |control| %>
-      <%= ERB.new(File.read(template_path + "/control.html.erb"), nil, nil, "_ctl").result(binding)  %>
-    <% end %>
-  <% end %>
 </div>
