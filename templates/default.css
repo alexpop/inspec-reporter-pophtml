@@ -50,6 +50,7 @@ pre code {
   padding: 8px 10px 10px 10px;
   margin: 0px 0px 10px 15px;
   border-radius: 6px;
+  display: block;
 }
 
 .controls_label {
@@ -144,7 +145,10 @@ pre code {
 
 @media print {
   .selector-panel {
-     visibility: hidden;
+    visibility: hidden;
+  }
+  #h1-report-id {
+    display: block;
   }
 }
 
@@ -177,7 +181,7 @@ pre code {
 }
 
 #report-time {
-  display: none;   /* Initially until we convert it to the browser timezone */
+  visibility: hidden;   /* Initially until we convert it to the browser timezone */
 }
 
 #inspec-version {

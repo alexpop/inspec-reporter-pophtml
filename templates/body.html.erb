@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <!-- saved from url=(0014)about:internet -->
 <!-- prior comment allows JS to execute on IE when saved as a local file, "MOTW" -->
+<!--
+JSON_DATA=<%= report_json_data %>
+-->
+
 <html lang="en">
   <head>
-    <title><%= Inspec::Dist::PRODUCT_NAME %> Results</title>
+    <title><%= Inspec::Dist::PRODUCT_NAME %> report</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
 /* Must inline all CSS files, this is a single-file output that may be airgapped */
@@ -19,7 +23,7 @@
   <body onload="pageLoaded()">
     <%= ERB.new(File.read(template_path + "/selector.html.erb"), nil, nil, "_select").result(binding)  %>
     <div class="inspec-report">
-    <h1><%= Inspec::Dist::PRODUCT_NAME %> report <span class="status-<%= report_extras['status'] %>"><code><%= report_extras['uuid'] %></code></span></h1>
+    <h1><%= Inspec::Dist::PRODUCT_NAME %> report <span><code class="status-<%= report_extras['status'] %>" id="h1-report-id"><%= report_extras['report_id'] %></code></span></h1>
 
     <div class="inspec-summary">
       <table id="statistics" class="info">
@@ -42,7 +46,7 @@
         <tr class= "date">
           <th>
             <div class="tooltip">Time<span class="tooltiptext">The date and time when the report finished.</span></div>:
-          </th><td><span id="report-time"><%= Time.now.utc.to_datetime.rfc3339 %></span></td>
+          </th><td><span id="report-time"><%= report_extras['end_time'] %></span></td>
         </tr>
         <tr class= "version"><th><div class="tooltip"><%= Inspec::Dist::PRODUCT_NAME.gsub(/Chef\s*/, "") %><span class="tooltiptext">The version of <%= Inspec::Dist::PRODUCT_NAME %> that was used to create this report.</span></div>:</th><td>v<%= run_data.version %></td></tr>
       </table>

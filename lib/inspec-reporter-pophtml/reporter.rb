@@ -15,14 +15,22 @@ module InspecPlugins::PopHtmlReporter
       css_path = cfg[:alternate_css_file] || (template_path + "/default.css")
 
       report_extras = {
-        'uuid' => SecureRandom.uuid,
-        'profiles' => {},
-        'sums' => {},
-        'status' => ''
+        'report_id' => SecureRandom.uuid,
+        'node_id'   => 'NOT_SPECIFIED',
+        'node_name' => 'NOT_SPECIFIED',
+        'tags'      => ['NOT','SPECIFIED'],
+        'profiles'  => {},
+        'sums'      => {},
+        'status'    => '',
+        'end_time' => Time.now.utc.to_datetime.rfc3339,
+        'product'   => Inspec::Dist::PRODUCT_NAME,
+        'product_version' => run_data.version
       }
 
       calculate_controls_sums(report_extras)
       calculate_statuses(report_extras)
+
+      report_json_data=report_extras.to_json
 
       template = ERB.new(File.read(template_path + "/body.html.erb"))
       output(template.result(binding))
@@ -55,7 +63,10 @@ module InspecPlugins::PopHtmlReporter
               sums_profile[status(control)] += 1
             end
             sums_profile['total'] = sums_profile['failed'] + sums_profile['passed'] + sums_profile['skipped'] + sums_profile['waived']
-            extras['profiles'][profile.sha256] = {}
+            extras['profiles'][profile.sha256] = {
+              'name' => profile.name,
+              'version' => profile.version
+            }
             extras['profiles'][profile.sha256]['sums'] = sums_profile
 
             sums_report['failed'] += sums_profile['failed']

@@ -79,6 +79,22 @@ function controlsClicked(event) {
   event.innerText = controls_label;
 }
 
+function expandAll() {
+  var selectors = document.querySelectorAll('.control');
+  for (i = 0; i < selectors.length; i++) {
+    selectors[i].style.display = "block";
+  }
+  var selectors = document.querySelectorAll('.result');
+  for (i = 0; i < selectors.length; i++) {
+    selectors[i].style.display = "block";
+  }
+}
+
+window.onbeforeprint = function(event) {
+  console.log("Printing detected, make all elements visible!");
+  expandAll();
+};
+
 /* Main entry point */
 function  pageLoaded() {
   var i;
@@ -104,5 +120,5 @@ function  pageLoaded() {
   var utc_date = new Date(report_time.textContent);
   var tz = new Date().toString().split(" ")[5];
   report_time.textContent = utc_date.toLocaleString() + '  ' + tz;
-  report_time.style.display = "inline";
+  report_time.style.visibility = "visible";
 }
