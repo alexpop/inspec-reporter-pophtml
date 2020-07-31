@@ -21,7 +21,15 @@
     <% if profile.controls.length > 0 %>
       <tr class="profile-controls">
         <td colspan="2">
-          <h3 class="controls-label" id="controls-<%= profile.sha256 %>" onclick="controlsClicked(this)">▼ Controls (<%= profile.controls.length %>):</h3>
+          <div class="controls-header">
+            <h3 class="controls-label" id="controls-<%= profile.sha256 %>" onclick="controlsClicked(this)">▼ Controls (<%= profile.controls.length %>) </h3>
+            <span class="line-stats">
+              <span class="status-failed roundy">F</span>: <%= report_extras['profiles'][profile.sha256]['sums']['failed'] %>
+              <span class="status-passed roundy">P</span>: <%= report_extras['profiles'][profile.sha256]['sums']['passed'] %>
+              <span class="status-skipped roundy">S</span>: <%= report_extras['profiles'][profile.sha256]['sums']['skipped'] %>
+              <span class="status-waived roundy">W</span> <%= report_extras['profiles'][profile.sha256]['sums']['waived'] %>
+            </span>
+          </div>
           <% profile.controls.each do |control| %>
             <%= ERB.new(File.read(template_path + "/control.html.erb"), nil, nil, "_ctl").result(binding)  %>
           <% end %>

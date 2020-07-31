@@ -33,11 +33,13 @@ function handleSelectorChange(evt) {
   var i;
   if (should_show) {
     for (i = 0; i < controls.length; i++) {
-      removeCssClass(controls[i].id, "hidden")
+      // removeCssClass(controls[i].id, "hidden")
+      controls[i].style.display = 'block';
     }
   } else {
     for (i = 0; i < controls.length; i++) {
-      addCssClass(controls[i].id, "hidden")
+      // addCssClass(controls[i].id, "hidden")
+      controls[i].style.display = 'none';
     }
   }
 }

@@ -2,6 +2,8 @@ body {
   margin: 20px 0% 20px 10%;
   padding: 0;
   background: #fff;
+  color: #3E4B5B;
+  background-color: #f2f4f8;
 }
 h1, h2, h3, h4, h5 {
   font-family: "Avenir Next W01", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -24,6 +26,7 @@ table.info th {
 .hidden {
   display: none;
 }
+
 pre code {
   background-color: #eee;
   border: 1px solid #999;
@@ -32,25 +35,32 @@ pre code {
 }
 
 .profile {
-  border: 2px solid #ddd;
+  /* border: 2px solid #ddd; */
   padding-left: 10px;
-  margin: 5px 5px 5px auto;
-  border-radius: 8px;
+  margin: 20px 5px 5px auto;
+  border-radius: 6px;
+  background-color: #fbfbfb;
+  -webkit-box-shadow: 0px 2px 4px rgba(126, 142, 177, 0.12);
+  box-shadow: 0px 2px 4px rgba(126, 142, 177, 0.12);
 }
 
 .profile-title {
   text-align: left;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cccccc6b;
   margin: 0px;
   margin: 6px 50px 0px 0px;
 }
 
 .control {
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
+  border: 1px solid rgba(83, 101, 140, 0.08);
   padding: 8px 10px 10px 10px;
   margin: 0px 0px 10px 15px;
   border-radius: 6px;
   display: block;
+  background-color: white;
+  -webkit-box-shadow: 0px 2px 4px rgba(126, 142, 177, 0.12);
+  box-shadow: 0px 2px 4px rgba(126, 142, 177, 0.12);
 }
 
 .controls_label {
@@ -58,7 +68,7 @@ pre code {
 }
 
 .profile-metadata {
-  padding: 10px;
+  padding: 10px 10px 0px 10px;
   width: 100%;
 }
 
@@ -86,29 +96,33 @@ pre code {
   color: white;
   background-color: darkgreen;
   padding: 2px 4px 2px 4px;
-  border-radius: 3px;
+  border-radius: 6px;
 }
 .status-failed {
   color: white;
   background-color: red;
   padding: 2px 4px 2px 4px;
-  border-radius: 3px;
+  border-radius: 6px;
 }
 .status-waived {
   color: white;
   background-color: grey;
   padding: 2px 4px 2px 4px;
-  border-radius: 3px;
+  border-radius: 6px;
 }
 .status-skipped {
   color: white;
   background-color: #969341;
   padding: 2px 4px 2px 4px;
-  border-radius: 3px;
+  border-radius: 6px;
 }
 
 #overall-status {
   padding-right: 5px;
+}
+
+#overall-status-value {
+  font-size: 20px;
 }
 
 .control-metadata {
@@ -117,20 +131,20 @@ pre code {
 
 .result-metadata {
   margin: 5px 0 10px 2%;
-  border-top: 1px solid #eee;
+  border-top: 1px solid rgba(83, 101, 140, 0.08);
   width: 95%
 }
-
-
 
 .selector-panel {
   position: fixed;
   z-index: 100;
   background-color: #ecc;
-  padding: 10px;
+  padding: 2px;
   top: 0;
   margin-left: -10%;
   border-bottom-right-radius: 10px;
+  -webkit-box-shadow: 0px 2px 4px rgba(126, 142, 177, 0.12);
+  box-shadow: 0px 2px 4px rgba(126, 142, 177, 0.12);
 }
 
 .selector-checkbox-span {
@@ -146,6 +160,7 @@ pre code {
 @media print {
   body {
     margin: 0px 0px 0px 0px;
+    background-color: white;
   }
   .selector-panel {
     visibility: hidden;
@@ -156,10 +171,13 @@ pre code {
 }
 
 .inspec-summary {
-  border: 3px solid #ccc;
+  /* border: 3px solid #ccc; */
   padding: 10px;
   margin: 5px 5px 15px auto;
-  border-radius: 8px;
+  border-radius: 6px;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 2px 4px rgba(126, 142, 177, 0.12);
+  box-shadow: 0px 2px 4px rgba(126, 142, 177, 0.12);
 }
 
 .inspec-summary h4 {
@@ -230,7 +248,21 @@ pre code {
 
 .controls-label {
   color: blue;
+  display: inline;
+  margin-right: 20px;
 }
+
+.controls-header {
+  padding: 20px 0px 10px 0px;
+  font-weight: bold;
+}
+
+.roundy {
+  border-radius: 10px;
+  padding: 3px 7px 3px 7px;
+  margin-left: 15px;
+}
+
 .controls-label:hover {
   cursor: pointer;
 }
