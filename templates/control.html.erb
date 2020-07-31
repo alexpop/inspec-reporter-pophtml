@@ -73,7 +73,7 @@
   </table>
 
   <% if control.results.length > 0 %>
-    <h4 class="results-label">Results (<%= control.results.length %>):</h4>
+    <h4 class="results-label" id="results-<%= profile.sha256 %>-<%= control.id %>" onclick="resultsClicked(this)">▼ Results (<%= control.results.length %>):</h4>
     <% control.results.each do |result| %>
       <%= ERB.new(File.read(template_path + "/result.html.erb"), nil, nil, "_rslt").result(binding)  %>
     <% end %>

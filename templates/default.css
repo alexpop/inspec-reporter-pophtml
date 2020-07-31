@@ -118,7 +118,7 @@ pre code {
 .result-metadata {
   margin: 5px 0 10px 2%;
   border-top: 1px solid #eee;
-  width: 80%
+  width: 95%
 }
 
 
@@ -144,6 +144,9 @@ pre code {
 }
 
 @media print {
+  body {
+    margin: 0px 0px 0px 0px;
+  }
   .selector-panel {
     visibility: hidden;
   }

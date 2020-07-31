@@ -79,6 +79,24 @@ function controlsClicked(event) {
   event.innerText = controls_label;
 }
 
+function resultsClicked(event) {
+  var selectors = document.querySelectorAll('.'+event.id);
+  console.log(event.id + ' has ' + selectors.length + ' results, collapsing...');
+  var results_label = event.innerText;
+  if (results_label[0] == expanded_char) {
+    for (i = 0; i < selectors.length; i++) {
+      selectors[i].style.display = "none";
+    }
+    results_label = results_label.replaceAt(0, collapsed_char);
+  } else {
+    for (i = 0; i < selectors.length; i++) {
+      selectors[i].style.display = "block";
+    }
+    results_label = results_label.replaceAt(0, expanded_char);
+  }
+  event.innerText = results_label;
+}
+
 function expandAll() {
   var selectors = document.querySelectorAll('.control');
   for (i = 0; i < selectors.length; i++) {
