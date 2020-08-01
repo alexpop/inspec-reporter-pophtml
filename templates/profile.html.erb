@@ -30,7 +30,7 @@
               <span class="status-waived roundy">W</span> <%= report_extras['profiles'][profile.sha256]['sums']['waived'] %>
             </span>
           </div>
-          <% profile.controls.each do |control| %>
+          <% profile.controls.each_with_index do |control,control_index| %>
             <%= ERB.new(File.read(template_path + "/control.html.erb"), nil, nil, "_ctl").result(binding)  %>
           <% end %>
         </td>

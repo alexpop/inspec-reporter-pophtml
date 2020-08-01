@@ -49,6 +49,20 @@ Specifies the full path to the location of a CSS file that will be read and inli
 
 Specifies the full path to the location of a JavaScript file that will be read and inlined into the HTML report. The default JavaScript will not be included. The JavaScript file should implement at least a `pageLoaded()` function, which will be called by the `onload` event of the HTML `body` element.
 
+### TODO
+
+```
+var sort_by_name = function(a, b) {
+     if(a.innerHTML.toLowerCase() < b.innerHTML.toLowerCase()) return -1;
+     if(a.innerHTML.toLowerCase() > b.innerHTML.toLowerCase()) return 1;
+     return 0;
+}
+
+Controls: [Failed First/Profile Order]
+
+Results: [Failed First (5)/Failed First (20)/Failed First (All)/Profile Order (5)/Profile Order (20)/Profile Order (All)]
+```
+
 ## Developing This Plugin
 
 Submit PR and will discuss, thank you!

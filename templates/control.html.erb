@@ -1,9 +1,9 @@
 <%
-  slugged_id = control.id.tr(" ", "_")
   control_status = status(control)
+  control_id = 'c-' + '%07d' % control_index
 %>
 
-<div class="control control-status-<%= control_status %> controls-<%= profile.sha256 %>" id="control-<%= slugged_id %>">
+<div class="control control-status-<%= control_status %> controls-<%= profile.sha256 %>" id="<%= control_id %>">
 
   <%
     # Determine range of impact
@@ -25,7 +25,7 @@
       <%= control.id %>
     <% end %>
   </code></h3>
-  <table class="control-metadata info" id="control-metadata-<%= slugged_id %>">
+  <table class="control-metadata info">
     <tr class="control-id"><th class="thl"><div class="tooltip">Id<span class="tooltiptext">The unique control id within this profile.</span></div>:</th><td><%= control.id %></td></tr>
     <tr class="status"><th class="thl"><div class="tooltip">Status<span class="tooltiptext">The overall status of the control taking into account the status of its results and any waivers (ignore conditions) applied for it.</span></div>:</th><td><b><span class="status-<%= control_status %>"><%= control_status.capitalize %></span></b></td></tr>
     <% if control.desc %>
@@ -61,9 +61,9 @@
     <tr class="code">
       <th class="thl"><tr class="desc"><th class="thl"><div class="tooltip">Code<span class="tooltiptext">The source code of the control as defined in the profile.</span></div>:</th>
       <td>
-        <input type="button" class="show-source-code" id="show-code-<%= slugged_id %>" value="Show Source Source"/>
-        <input type="button" class="hide-source-code hidden" id="hide-code-<%= slugged_id %>" value="Hide Source Source"/>
-        <pre class="source-code hidden" id="source-code-<%= slugged_id %>">
+        <input type="button" class="show-source-code" id="show-code-<%= control_id %>" value="Show Source Source"/>
+        <input type="button" class="hide-source-code hidden" id="hide-code-<%= control_id %>" value="Hide Source Source"/>
+        <pre class="source-code hidden" id="source-code-<%= control_id %>">
           <code><%= control.code %></code>
         </pre>
       </td>
@@ -73,8 +73,8 @@
   </table>
 
   <% if control.results.length > 0 %>
-    <h4 class="results-label" id="results-<%= profile.sha256 %>-<%= control.id %>" onclick="resultsClicked(this)">▼ Results (<%= control.results.length %>):</h4>
-    <% control.results.each do |result| %>
+    <h4 class="results-label" id="results-<%= profile.sha256 %>-<%= control_id %>" onclick="resultsClicked(this)">▼ Results (<%= control.results.length %>):</h4>
+    <% control.results.each_with_index do |result,result_index| %>
       <%= ERB.new(File.read(template_path + "/result.html.erb"), nil, nil, "_rslt").result(binding)  %>
     <% end %>
   <% end %>
