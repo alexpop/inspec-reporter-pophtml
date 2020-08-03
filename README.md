@@ -75,9 +75,14 @@ Results sort:
   Failed First (5)
   Failed First (50)
   Failed First (All)
+  Profile Order (0)
   Profile Order (5)
   Profile Order (50)
   Profile Order (All)
+
+
+  * Waived fields for controls
+  * Results stats for controls
 ```
 
 ## Developing This Plugin

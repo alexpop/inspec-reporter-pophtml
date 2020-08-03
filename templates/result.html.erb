@@ -1,8 +1,8 @@
 <%
-  result_id = 'r-' + '%07d' % result_index
+  result_id = 'r-' + '%07d' % result.backtrace
 %>
 
-<div class="result results-<%= profile.sha256 %>-<%= control_id %>" id="<%= result_id %>">
+<div class="result results-<%= profile.sha256 %>-<%= control_id %> <%= result_index < max_results_per_control ? "" : "hidden" %>" id="<%= result_id %>">
   <h4 class="resource-title"><code><%= result.resource_title.to_s %></code></h4>
   <table class="result-metadata info">
     <tr class="expectation_message"><th class="thl">Condition:</th><td><code><%= result.expectation_message %></code></td></tr>

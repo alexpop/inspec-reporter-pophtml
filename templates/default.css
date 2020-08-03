@@ -253,10 +253,26 @@ table.info th {
   font-weight: bold;
 }
 
+.results-header {
+  padding: 20px 0px 10px 0px;
+  font-weight: bold;
+}
+
 .roundy {
   border-radius: 10px;
   padding: 3px 7px 3px 7px;
   margin-left: 20px;
+}
+
+.roundy-result {
+  border-radius: 10px;
+  padding: 3px 7px 3px 7px;
+  margin-left: 20px;
+
+}
+
+.line-stats-results {
+  font-size: 10px;
 }
 
 .roundy-w {
@@ -269,6 +285,7 @@ table.info th {
 
 .results-label {
   color: blue;
+  display: inline;
   margin: 20px 0px 15px 10px;
 }
 .results-label:hover {

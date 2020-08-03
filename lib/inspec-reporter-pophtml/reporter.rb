@@ -15,6 +15,7 @@ module InspecPlugins::PopHtmlReporter
       css_path = cfg[:alternate_css_file] || (template_path + "/default.css")
       preety_js_path = cfg[:alternate_preety_js_file] || (template_path + "/run_prettify.js")
       preety_css_path = cfg[:alternate_preety_js_file] || (template_path + "/run_prettify_dark.css")
+      max_results_per_control = cfg[:max_results_per_control] || 5
 
       report_extras = {
         'report_id' => SecureRandom.uuid,
@@ -31,8 +32,9 @@ module InspecPlugins::PopHtmlReporter
 
       calculate_controls_sums(report_extras)
       calculate_statuses(report_extras)
+      sort_and_truncate_control_results(max_results_per_control)
 
-      report_json_data=report_extras.to_json
+      report_json_data = report_extras.to_json
 
       template = ERB.new(File.read(template_path + "/body.html.erb"))
       output(template.result(binding))
@@ -44,42 +46,62 @@ module InspecPlugins::PopHtmlReporter
 
     # Calculates control sums based on their status
     def calculate_controls_sums(extras)
-      sums_report = {
+      # Summary of the status of all controls for a report (across one or multiple profiles)
+      report_control_stats = {
         'failed' => 0,
         'passed' => 0,
         'skipped' => 0,
         'waived' => 0,
         'total' => 0
       }
+      extras['sums'] = report_control_stats
       if run_data['profiles'] != nil && run_data['profiles'].length > 0
         run_data['profiles'].each do |profile|
-          sums_profile = {
+          # Summary of the status of all controls for a profile
+          profile_control_stats = {
             'failed' => 0,
             'passed' => 0,
             'skipped' => 0,
             'waived' => 0,
             'total' => 0
           }
+          extras['profiles'][profile.sha256] = {
+            'name'     => profile.name,
+            'version'  => profile.version,
+            'sums'     => profile_control_stats,
+            'controls' => {}
+          }
           if profile['controls'] != nil && profile['controls'].length > 0
             profile['controls'].each do |control|
-              sums_profile[status(control)] += 1
+              # Summary of the status of all results for a control
+              control_result_stats = {
+                'failed' => 0,
+                'passed' => 0,
+                'skipped' => 0,
+                'total' => 0
+              }
+              extras['profiles'][profile.sha256]['controls'][control.id] = { 'sums' => control_result_stats }
+              if control['results'] != nil && control['results'].length > 0
+                control['results'].each do |result|
+                  control_result_stats[result.status] += 1
+                end
+                control_result_stats['total'] = control_result_stats['failed'] + control_result_stats['passed'] + control_result_stats['skipped']
+                extras['profiles'][profile.sha256]['controls'][control.id] = { 'sums' => control_result_stats }
+              end
+              profile_control_stats[control_status(control, control_result_stats)] += 1
             end
-            sums_profile['total'] = sums_profile['failed'] + sums_profile['passed'] + sums_profile['skipped'] + sums_profile['waived']
-            extras['profiles'][profile.sha256] = {
-              'name' => profile.name,
-              'version' => profile.version
-            }
-            extras['profiles'][profile.sha256]['sums'] = sums_profile
+            profile_control_stats['total'] = profile_control_stats['failed'] + profile_control_stats['passed'] + profile_control_stats['skipped'] + profile_control_stats['waived']
+            extras['profiles'][profile.sha256]['sums'] = profile_control_stats
 
-            sums_report['failed'] += sums_profile['failed']
-            sums_report['passed'] += sums_profile['passed']
-            sums_report['skipped'] += sums_profile['skipped']
-            sums_report['waived'] += sums_profile['waived']
+            report_control_stats['failed'] += profile_control_stats['failed']
+            report_control_stats['passed'] += profile_control_stats['passed']
+            report_control_stats['skipped'] += profile_control_stats['skipped']
+            report_control_stats['waived'] += profile_control_stats['waived']
           end
         end
       end
-      sums_report['total'] = sums_report['failed'] + sums_report['passed'] + sums_report['skipped'] + sums_report['waived']
-      extras['sums'] = sums_report
+      report_control_stats['total'] = report_control_stats['failed'] + report_control_stats['passed'] + report_control_stats['skipped'] + report_control_stats['waived']
+      extras['sums'] = report_control_stats
     end
 
 
@@ -116,30 +138,13 @@ module InspecPlugins::PopHtmlReporter
     end
 
     # Returns the status of a control
-    def status(control)
+    def control_status(control, control_result_stats)
       cwd = control['waiver_data']
       if cwd != nil && cwd != Inspec::RunData::Control::WaiverData.new({}) && !cwd['message'].start_with?('Waiver expired')
         return 'waived'
       else
-        return results_status(control)
+        return status_from_sums(control_result_stats)
       end
-    end
-
-    # Returns the status from the results of a control
-    def results_status(control)
-      status = 'passed'
-      if control['results'] != nil && control['results'].length > 0
-        control['results'].each do |result|
-          if result.status == 'failed'
-            status = 'failed'
-            break
-          elsif result.status == 'skipped'
-            status = 'skipped'
-            break
-          end
-        end
-      end
-      return status
     end
 
     # Returns the status from the results of a control
@@ -153,6 +158,26 @@ module InspecPlugins::PopHtmlReporter
         status = 'waived'
       end
       return status
+    end
+
+    def sort_and_truncate_control_results(max_results)
+      run_data['profiles'].each do |profile|
+        next unless run_data['controls'].is_a?(Array)
+        profile['controls'].each do |control|
+          next unless control['results'].is_a?(Array)
+          control['results'].each_with_index do |result,result_index|
+            # The unused 'backtrace' becomes the placeholder for the original index of the result. Then we sort.
+            result['backtrace'] = result_index
+          end
+          res = control['results']
+          truncated = { failed: 0, skipped: 0, passed: 0 }
+          res.sort_by! do |r|
+            # Replacing "skipped" with "kipped" for the sort logic so that
+            # the results are sorted in this order: failed, skipped, passed
+            r['status'] == 'skipped' ? 'kipped' : r['status']
+          end
+        end
+      end
     end
   end
 end

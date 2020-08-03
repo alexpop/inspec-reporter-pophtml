@@ -1,6 +1,13 @@
 <%
-  control_status = status(control)
   control_id = 'c-' + '%07d' % control_index
+  control_status = control_status(control, report_extras['profiles'][profile.sha256]['controls'][control.id]['sums'])
+
+  if max_results_per_control < report_extras['profiles'][profile.sha256]['controls'][control.id]['sums']['total']
+    # This is when we show less results than they are in total for the control
+    results_shown = "#{max_results_per_control} / #{report_extras['profiles'][profile.sha256]['controls'][control.id]['sums']['total']}"
+  else
+    results_shown = report_extras['profiles'][profile.sha256]['controls'][control.id]['sums']['total']
+  end
 %>
 
 <div class="control control-status-<%= control_status %> controls-<%= profile.sha256 %>" id="<%= control_id %>">
@@ -67,11 +74,17 @@
       </td>
     </tr>
   <!-- TODO waiver data -->
-
   </table>
 
   <% if control.results.length > 0 %>
-    <h4 class="results-label" id="results-<%= profile.sha256 %>-<%= control_id %>" onclick="resultsClicked(this)">▼ Results (<%= control.results.length %>):</h4>
+    <div class="results-header">
+      <h4 class="results-label" id="results-<%= profile.sha256 %>-<%= control_id %>" onclick="resultsClicked(this)">▼ Results (<%= results_shown %>):</h4>
+      <span class="line-stats-results">
+        <span class="status-failed roundy-result">F</span> <%= report_extras['profiles'][profile.sha256]['controls'][control.id]['sums']['failed'] %>
+        <span class="status-passed roundy-result">P</span> <%= report_extras['profiles'][profile.sha256]['controls'][control.id]['sums']['passed'] %>
+        <span class="status-skipped roundy-result">S</span> <%= report_extras['profiles'][profile.sha256]['controls'][control.id]['sums']['skipped'] %>
+      </span>
+    </div>
     <% control.results.each_with_index do |result,result_index| %>
       <%= ERB.new(File.read(template_path + "/result.html.erb"), nil, nil, "_rslt").result(binding)  %>
     <% end %>
