@@ -30,13 +30,6 @@ table.info th {
   display: none;
 }
 
-pre code {
-  background-color: #eee;
-  border: 1px solid #999;
-  display: block;
-  padding: 10px;
-}
-
 .profile {
   /* border: 2px solid #ddd; */
   padding-left: 10px;
@@ -280,8 +273,4 @@ pre code {
 }
 .results-label:hover {
   cursor: pointer;
-}
-
-.source-code {
-  background-color: #2d3238 !important;
 }

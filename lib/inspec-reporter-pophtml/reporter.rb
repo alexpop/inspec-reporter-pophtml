@@ -14,6 +14,7 @@ module InspecPlugins::PopHtmlReporter
       js_path = cfg[:alternate_js_file] || (template_path + "/default.js")
       css_path = cfg[:alternate_css_file] || (template_path + "/default.css")
       preety_js_path = cfg[:alternate_preety_js_file] || (template_path + "/run_prettify.js")
+      preety_css_path = cfg[:alternate_preety_js_file] || (template_path + "/run_prettify_dark.css")
 
       report_extras = {
         'report_id' => SecureRandom.uuid,

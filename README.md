@@ -61,6 +61,23 @@ var sort_by_name = function(a, b) {
 Controls: [Failed First/Profile Order]
 
 Results: [Failed First (5)/Failed First (20)/Failed First (All)/Profile Order (5)/Profile Order (20)/Profile Order (All)]
+
+Controls sort:
+  F-P-S-W Order
+  W-S-F-P Order
+  P-S-W-F Order
+
+  Failed First
+  Passed First
+  Profile Order
+
+Results sort:
+  Failed First (5)
+  Failed First (50)
+  Failed First (All)
+  Profile Order (5)
+  Profile Order (50)
+  Profile Order (All)
 ```
 
 ## Developing This Plugin
