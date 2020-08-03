@@ -6,7 +6,7 @@
   <h4 class="resource-title"><code><%= result.resource_title.to_s %></code></h4>
   <table class="result-metadata info">
     <tr class="expectation_message"><th class="thl">Condition:</th><td><code><%= result.expectation_message %></code></td></tr>
-    <tr class="status"><th class="thl">Status:</th><td><div class="status-<%= result.status %>"><%= result.status.capitalize %></div></td></tr>
+    <tr class="status"><th class="thl">Status:</th><td><span class="status-<%= result.status %>"><%= result.status.capitalize %></span></td></tr>
     <% if result.status == "failed" %>
     <tr class="fail_message"><th class="thl">Fail Message:</th><td><code><%= result.message %></code></td></tr>
     <% end %>

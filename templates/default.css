@@ -4,10 +4,13 @@ body {
   background: #fff;
   color: #3E4B5B;
   background-color: #f2f4f8;
+  font-family: Arial, Helvetica, sans-serif;
 }
-h1, h2, h3, h4, h5 {
-  font-family: "Avenir Next W01", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+.font-narrow {
+  font-family: "Arial Narrow", Helvetica, sans-serif;
 }
+
 h1, h2 {
   padding: 10px;
   text-align: center
@@ -238,7 +241,7 @@ pre code {
 
 /* thl classes in result classes */
 .result .thl {
-  width: 6em;
+  width: 7em;
   font-size: 14px;
 }
 
@@ -260,7 +263,11 @@ pre code {
 .roundy {
   border-radius: 10px;
   padding: 3px 7px 3px 7px;
-  margin-left: 15px;
+  margin-left: 20px;
+}
+
+.roundy-w {
+  padding: 3px 4px 3px 4px;
 }
 
 .controls-label:hover {
