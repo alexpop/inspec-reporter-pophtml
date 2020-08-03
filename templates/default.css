@@ -281,3 +281,7 @@ pre code {
 .results-label:hover {
   cursor: pointer;
 }
+
+.source-code {
+  background-color: #2d3238 !important;
+}

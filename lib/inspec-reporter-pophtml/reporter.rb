@@ -13,6 +13,7 @@ module InspecPlugins::PopHtmlReporter
       cfg = Inspec::Config.cached.fetch_plugin_config("inspec-reporter-pophtml")
       js_path = cfg[:alternate_js_file] || (template_path + "/default.js")
       css_path = cfg[:alternate_css_file] || (template_path + "/default.css")
+      preety_js_path = cfg[:alternate_preety_js_file] || (template_path + "/run_prettify.js")
 
       report_extras = {
         'report_id' => SecureRandom.uuid,
