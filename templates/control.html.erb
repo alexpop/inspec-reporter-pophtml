@@ -6,7 +6,7 @@
     # This is when we show less results than they are in total for the control
     results_shown = "#{max_results_per_control} / #{report_extras['profiles'][profile.sha256]['controls'][control.id]['sums']['total']}"
   else
-    results_shown = report_extras['profiles'][profile.sha256]['controls'][control.id]['sums']['total']
+    results_shown = "#{report_extras['profiles'][profile.sha256]['controls'][control.id]['sums']['total']} / #{report_extras['profiles'][profile.sha256]['controls'][control.id]['sums']['total']}"
   end
 %>
 

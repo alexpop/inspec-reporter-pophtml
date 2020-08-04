@@ -53,7 +53,6 @@ table.info th {
   padding: 8px 10px 10px 10px;
   margin: 0px 0px 10px 15px;
   border-radius: 6px;
-  display: block;
   background-color: white;
   -webkit-box-shadow: 0px 2px 4px rgba(126, 142, 177, 0.12);
   box-shadow: 0px 2px 4px rgba(126, 142, 177, 0.12);
@@ -135,7 +134,7 @@ table.info th {
   position: fixed;
   z-index: 100;
   background-color: #ecc;
-  padding: 2px;
+  padding: 0px 2px 5px 2px;
   top: 0;
   margin-left: -10%;
   border-bottom-right-radius: 10px;
@@ -258,6 +257,10 @@ table.info th {
   font-weight: bold;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .roundy {
   border-radius: 10px;
   padding: 3px 7px 3px 7px;
@@ -290,4 +293,10 @@ table.info th {
 }
 .results-label:hover {
   cursor: pointer;
+}
+
+#results-dropdown {
+  border-radius: 7px;
+  font-weight: bold;
+  color: #3E4B5B;
 }

@@ -16,4 +16,16 @@
   <span class="profile-selector-checkbox-span">
     <input class="profile-selector-checkbox" id="child-profile-checkbox" type="checkbox" /><label for="child-profile-checkbox">Dependencies</label>
   </span>
+  <p id="selector-instructions">Show results:</p>
+  <span class="show-results-dropdown">
+    <select name="ff<%= max_results_per_control %>" id="results-dropdown" class="font-narrow bold" onchange="handleResultsChange(this)">
+      <option value="ff0">No (collapse them)</option>
+      <option value="ff<%= max_results_per_control %>" selected>Failed First (<%= max_results_per_control %>)</option>
+      <option value="ff30">Failed First (30)</option>
+      <option value="ffa">Failed First (All)</option>
+      <!-- <option value="po3">Profile Order (3)</option>
+      <option value="po30">Profile Order (30)</option>
+      <option value="poa">Profile Order (All)</option> -->
+    </select>
+  </span>
 </div>
