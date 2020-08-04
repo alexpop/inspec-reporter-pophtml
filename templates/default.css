@@ -318,3 +318,8 @@ table.info th {
 .result-duration {
   font-size: 14px;
 }
+
+.tag-value {
+  padding-left: 20px;
+  font-style: italic;
+}

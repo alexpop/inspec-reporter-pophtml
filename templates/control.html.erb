@@ -53,7 +53,7 @@
         <td>
           <table class="tags">
             <% control.tags.each do |tag_name, tag_text| %>
-              <tr><td><%= CGI.escapeHTML(tag_name) %></td><td><%= CGI.escapeHTML(tag_text) %></td></tr>
+              <tr><td><%= CGI.escapeHTML(tag_name.to_s) %></td><td class="tag-value"><%= CGI.escapeHTML(tag_text.to_s) %></td></tr>
             <% end %>
           </table>
         </td>
@@ -65,7 +65,9 @@
         <td>
           <ul>
           <% control.refs.each do |r| %>
-            <li><a href="<%= CGI.escapeHTML(r.url) %>"><%= CGI.escapeHTML(r.ref) %></a></li>
+            <% if r.url %>
+              <li><a href="<%= CGI.escapeHTML(r.url.to_s) %>"><%= CGI.escapeHTML(r.ref.to_s) %></a></li>
+            <% end %>
           <% end %>
           </ul>
         </td>
