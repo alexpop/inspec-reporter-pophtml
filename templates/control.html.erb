@@ -74,12 +74,11 @@
     <tr class="code">
       <th class="thl"><tr class="desc"><th class="thl"><div class="tooltip">Code<span class="tooltiptext">The source code of the control as defined in the profile.</span></div>:</th>
       <td>
-        <input type="button" class="show-source-code" id="show-code-<%= CGI.escapeHTML(control_id) %>" value="Show Control Source"/>
-        <input type="button" class="hide-source-code hidden" id="hide-code-<%= CGI.escapeHTML(control_id) %>" value="Hide Control Source"/>
-        <pre class="source-code hidden prettyprint" id="source-code-<%= CGI.escapeHTML(control_id) %>"><code class="language-ruby"><%= CGI.escapeHTML(control.code.strip) %></code></pre>
+        <input type="button" class="show-source-code" id="show-code-pro-<%= profile_index %>-<%= control_id %>" value="Show Control Source"/>
+        <input type="button" class="hide-source-code hidden" id="hide-code-pro-<%= profile_index %>-<%= control_id %>" value="Hide Control Source"/>
+        <pre class="source-code hidden prettyprint" id="source-code-pro-<%= profile_index %>-<%= control_id %>"><code class="language-ruby"><%= CGI.escapeHTML(control.code.strip) %></code></pre>
       </td>
     </tr>
-  <!-- TODO waiver data -->
   </table>
 
   <% if control.results.length > 0 %>

@@ -64,7 +64,7 @@ JSON_DATA=<%= report_json_data %>
       </table>
     </div>
 
-    <% run_data.profiles.each do |profile| %>
+    <% run_data.profiles.each_with_index do |profile,profile_index| %>
       <%= ERB.new(File.read(template_path + "/profile.html.erb"), nil, nil, "_prof").result(binding)  %>
     <% end %>
 

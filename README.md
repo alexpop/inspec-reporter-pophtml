@@ -51,7 +51,7 @@ Specifies the full path to the location of a JavaScript file that will be read a
 
 ### TODO
 
- * `Show Control Source` not working for more than 1 profile. Second profile controls expand first profile controls.
+* Delay tooltips
 
 
 ## Developing This Plugin
