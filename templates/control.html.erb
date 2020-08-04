@@ -34,7 +34,13 @@
   </code></h3>
   <table class="control-metadata info">
     <tr class="control-id"><th class="thl"><div class="tooltip">Id<span class="tooltiptext">The unique control id within this profile.</span></div>:</th><td><%= control.id %></td></tr>
-    <tr class="status"><th class="thl"><div class="tooltip">Status<span class="tooltiptext">The overall status of the control taking into account the status of its results and any waivers (ignore conditions) applied for it.</span></div>:</th><td><b><span class="status-<%= control_status %>"><%= control_status.capitalize %></span></b></td></tr>
+    <tr class="status"><th class="thl"><div class="tooltip">Status<span class="tooltiptext">The overall status of the control taking into account the status of its results and any waivers (ignore conditions) applied for it.</span></div>:</th><td><b><span class="status-<%= control_status %>"><%= control_status.capitalize %></span></b>
+      <% if control_status == 'waived' %>
+        <%= control.waiver_data.expiration_date.nil? ? '' : "<i>until</i> <span class=\"waiver-expiration\">#{control.waiver_data.expiration_date}</span>" %>
+        <%= control.waiver_data.justification.nil? ? '' : "<i>with justification</i> <span class=\"waiver-justification\">#{control.waiver_data.justification}</span>" %>
+      <% end %>
+      </td>
+    </tr>
     <% if control.desc %>
       <tr class="desc"><th class="thl"><div class="tooltip">Desc<span class="tooltiptext">The description of the control as defined in the profile.</span></div>:</th><td><%= control.desc %></td></tr>
     <% end %>

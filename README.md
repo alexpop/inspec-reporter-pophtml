@@ -51,17 +51,6 @@ Specifies the full path to the location of a JavaScript file that will be read a
 
 ### TODO
 
-```
-var sort_by_name = function(a, b) {
-     if(a.innerHTML.toLowerCase() < b.innerHTML.toLowerCase()) return -1;
-     if(a.innerHTML.toLowerCase() > b.innerHTML.toLowerCase()) return 1;
-     return 0;
-}
-
-Controls: [Failed First/Profile Order]
-
-  * Waived fields for controls
-```
 
 ## Developing This Plugin
 

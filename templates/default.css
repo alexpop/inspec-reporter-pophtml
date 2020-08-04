@@ -306,3 +306,11 @@ table.info th {
   font-weight: bold;
   color: #3E4B5B;
 }
+
+.waiver-expiration {
+  font-weight: bold;
+}
+
+.waiver-justification {
+  font-weight: bold;
+}
