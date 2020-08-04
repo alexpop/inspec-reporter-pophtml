@@ -222,6 +222,7 @@ table.info th {
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
+  font-size: 14px;
 }
 .tooltip:hover .tooltiptext {
   visibility: visible;

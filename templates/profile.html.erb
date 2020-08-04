@@ -1,6 +1,6 @@
 <div class="profile <%= profile.parent_profile ? "child-profile hidden" : "" %>" id="profile-<%= profile.name %>">
   <% display_name = profile.title || profile.name %>
-  <h2 class="profile-title">Profile <%= display_name %></h2>
+  <h2 class="profile-title"><div class="tooltip">Profile<span class="tooltiptext">One of the profiles used to generate this report. Each profile can have one or multiple controls. Each control can have one or multiple results.</span></div>: <%= display_name %></h2>
 
   <table class="profile-metadata info" id="profile-metadata-<%= profile.name %>">
     <tr class="profile-name"><th class="thl"><div class="tooltip">Name<span class="tooltiptext">The short profile 'name' as defined in the profile metadata.</span></div>:</th><td><%= profile.name %></td></tr>
