@@ -51,7 +51,12 @@ function handleSelectorChange(evt) {
   var i;
   if (should_show) {
     for (i = 0; i < controls.length; i++) {
-      showElement(controls[i]);
+      var control_profile_sha = controls[i].parentElement.id;
+      var label = document.getElementById('label-' + control_profile_sha).innerText;
+      if (label[0] == expanded_char) {
+        // Only show element if the Controls are expanded for this profile
+        showElement(controls[i]);
+      }
       profile_controls[controls[i].parentElement.id]['shown']++;
     }
   } else {
@@ -62,7 +67,8 @@ function handleSelectorChange(evt) {
   }
   var controls_labels = document.getElementsByClassName("controls-label");
   for (i = 0; i < controls_labels.length; i++) {
-    controls_labels[i].innerText = controls_labels[i].innerText[0] + 'Controls (' + profile_controls[controls_labels[i].id]['shown'] + ' / ' + profile_controls[controls_labels[i].id]['total'] + ')';
+    controls_profile_sha = controls_labels[i].id.replace('label-', '');
+    controls_labels[i].innerText = controls_labels[i].innerText[0] + ' Controls (' + profile_controls[controls_profile_sha]['shown'] + ' / ' + profile_controls[controls_profile_sha]['total'] + ')';
   }
 }
 
@@ -86,7 +92,7 @@ String.prototype.replaceAt = function(index, replacement) {
 }
 
 function controlsClicked(event) {
-  var selectors = document.querySelectorAll('.'+event.id);
+  var selectors = document.querySelectorAll('.' + event.id.replace('label-', ''));
   console.log(event.id + ' has ' + selectors.length + ' controls, collapsing...');
   var controls_label = event.innerText;
   if (controls_label[0] == expanded_char) {
@@ -115,7 +121,7 @@ function controlsClicked(event) {
 }
 
 function resultsClicked(event) {
-  var selectors = document.querySelectorAll('.'+event.id);
+  var selectors = document.querySelectorAll('.' + event.id);
   console.log(event.id + ' has ' + selectors.length + ' results, collapsing...');
   var results_label = event.innerText;
   if (results_label[0] == expanded_char) {

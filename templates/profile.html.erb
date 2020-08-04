@@ -22,7 +22,7 @@
       <tr class="profile-controls">
         <td colspan="2" id="controls-<%= profile.sha256 %>">
           <div class="controls-header">
-            <h3 class="controls-label" id="controls-<%= profile.sha256 %>" onclick="controlsClicked(this)">▼ Controls (<%= "#{profile.controls.length} / #{profile.controls.length}" %>) </h3>
+            <h3 class="controls-label" id="label-controls-<%= profile.sha256 %>" onclick="controlsClicked(this)">▼ Controls (<%= "#{profile.controls.length} / #{profile.controls.length}" %>) </h3>
             <span class="line-stats">
               <span class="status-failed roundy">F</span> <%= report_extras['profiles'][profile.sha256]['sums']['failed'] %>
               <span class="status-passed roundy">P</span> <%= report_extras['profiles'][profile.sha256]['sums']['passed'] %>
