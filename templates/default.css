@@ -234,7 +234,7 @@ table.info th {
 } */
 
 .thl {
-  width: 4em;
+  width: 7.5em;
 }
 
 /* thl classes in result classes */
@@ -313,4 +313,8 @@ table.info th {
 
 .waiver-justification {
   font-weight: bold;
+}
+
+.result-duration {
+  font-size: 14px;
 }

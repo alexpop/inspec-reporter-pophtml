@@ -3,16 +3,16 @@
 %>
 
 <div class="result results-<%= profile.sha256 %>-<%= control_id %> <%= result_index < max_results_per_control ? "" : "hidden" %>" id="<%= result_id %>">
-  <h4 class="resource-title"><code><%= result.resource_title.to_s %></code></h4>
+  <h4 class="resource-title"><code><%= CGI.escapeHTML(result.resource_title.to_s) %></code></h4>
   <table class="result-metadata info">
-    <tr class="expectation_message"><th class="thl">Condition:</th><td><code><%= result.expectation_message %></code></td></tr>
+    <tr class="expectation_message"><th class="thl">Condition:</th><td><code><%= CGI.escapeHTML(result.expectation_message) %></code></td></tr>
     <tr class="status"><th class="thl">Status:</th><td><span class="status-<%= result.status %>"><%= result.status.capitalize %></span></td></tr>
     <% if result.status == "failed" %>
-    <tr class="fail_message"><th class="thl">Fail Message:</th><td><code><%= result.message %></code></td></tr>
+    <tr class="fail_message"><th class="thl">Fail Message:</th><td><code><%= CGI.escapeHTML(result.message) %></code></td></tr>
     <% end %>
     <% if result.status == "skipped" %>
-    <tr class="skip_message"><th class="thl">Skip Message:</th><td><%= result.skip_message %></td></tr>
+    <tr class="skip_message"><th class="thl">Skip Message:</th><td><%= CGI.escapeHTML(result.skip_message) %></td></tr>
     <% end %>
-    <tr class="duration"><th class="thl">Duration:</th><td><%= result.run_time %> seconds</td></tr>
+    <tr class="duration"><th class="thl">Duration:</th><td class="result-duration"><%= CGI.escapeHTML(result.run_time.to_s) %> seconds</td></tr>
   </table>
 </div>

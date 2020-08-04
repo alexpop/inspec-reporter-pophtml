@@ -1,4 +1,5 @@
 require 'erb'
+require 'cgi'
 require 'inspec/config'
 require 'securerandom'
 
@@ -115,8 +116,10 @@ module InspecPlugins::PopHtmlReporter
         run_data['profiles'].each do |profile|
           if profile['status'] == 'failed'
             failed_profiles += 1
+            extras['profiles'][profile.sha256]['status'] = 'failed'
           elsif profile['status'] == 'skipped'
             skipped_profiles += 1
+            extras['profiles'][profile.sha256]['status'] = 'skipped'
           else
             if profile['status'].to_s == '' || profile['status'] == 'loaded'
               extras['profiles'][profile.sha256]['status'] = status_from_sums(extras['profiles'][profile.sha256]['sums'])

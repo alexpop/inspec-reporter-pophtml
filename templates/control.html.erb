@@ -27,22 +27,22 @@
 
   <h3 class="control-title"><code>
     <% if control.title %>
-      <%= control.title %>
+      <%= CGI.escapeHTML(control.title) %>
     <% else %>
-      <%= control.id %>
+      <%= CGI.escapeHTML(control.id) %>
     <% end %>
   </code></h3>
   <table class="control-metadata info">
-    <tr class="control-id"><th class="thl"><div class="tooltip">Id<span class="tooltiptext">The unique control id within this profile.</span></div>:</th><td><%= control.id %></td></tr>
+    <tr class="control-id"><th class="thl"><div class="tooltip">Id<span class="tooltiptext">The unique control id within this profile.</span></div>:</th><td><%= CGI.escapeHTML(control.id) %></td></tr>
     <tr class="status"><th class="thl"><div class="tooltip">Status<span class="tooltiptext">The overall status of the control taking into account the status of its results and any waivers (ignore conditions) applied for it.</span></div>:</th><td><b><span class="status-<%= control_status %>"><%= control_status.capitalize %></span></b>
       <% if control_status == 'waived' %>
-        <%= control.waiver_data.expiration_date.nil? ? '' : "<i>until</i> <span class=\"waiver-expiration\">#{control.waiver_data.expiration_date}</span>" %>
-        <%= control.waiver_data.justification.nil? ? '' : "<i>with justification</i> <span class=\"waiver-justification\">#{control.waiver_data.justification}</span>" %>
+        <%= control.waiver_data.expiration_date.nil? ? '' : "<i>until</i> <span class=\"waiver-expiration\">#{CGI.escapeHTML(control.waiver_data.expiration_date.to_s)}</span>" %>
+        <%= control.waiver_data.justification.nil? ? '' : "<i>with justification</i> <span class=\"waiver-justification\">#{CGI.escapeHTML(control.waiver_data.justification)}</span>" %>
       <% end %>
       </td>
     </tr>
     <% if control.desc %>
-      <tr class="desc"><th class="thl"><div class="tooltip">Desc<span class="tooltiptext">The description of the control as defined in the profile.</span></div>:</th><td><%= control.desc %></td></tr>
+      <tr class="desc"><th class="thl"><div class="tooltip">Desc<span class="tooltiptext">The description of the control as defined in the profile.</span></div>:</th><td><%= CGI.escapeHTML(control.desc) %></td></tr>
     <% end %>
     <% if control.impact %>
       <tr class="impact impact-<%= impact_level %>"><th class="thl"><div class="tooltip">Impact<span class="tooltiptext">The criticality of the control expressed as a number between 0.0 and 1.0, with a value &lt; 0.4 being considered 'LOW', a value &lt; 0.7 being considered 'MEDIUM' otherwise 'HIGH'.</span></div>:</th><td><%= control.impact %></td></tr>
@@ -53,7 +53,7 @@
         <td>
           <table class="tags">
             <% control.tags.each do |tag_name, tag_text| %>
-              <tr><td><%= tag_name %></td><td><%= tag_text %></td></tr>
+              <tr><td><%= CGI.escapeHTML(tag_name) %></td><td><%= CGI.escapeHTML(tag_text) %></td></tr>
             <% end %>
           </table>
         </td>
@@ -65,7 +65,7 @@
         <td>
           <ul>
           <% control.refs.each do |r| %>
-            <li><a href="<%= r.url %>"><%= r.ref %></a></li>
+            <li><a href="<%= CGI.escapeHTML(r.url) %>"><%= CGI.escapeHTML(r.ref) %></a></li>
           <% end %>
           </ul>
         </td>
@@ -74,9 +74,9 @@
     <tr class="code">
       <th class="thl"><tr class="desc"><th class="thl"><div class="tooltip">Code<span class="tooltiptext">The source code of the control as defined in the profile.</span></div>:</th>
       <td>
-        <input type="button" class="show-source-code" id="show-code-<%= control_id %>" value="Show Source Source"/>
-        <input type="button" class="hide-source-code hidden" id="hide-code-<%= control_id %>" value="Hide Source Source"/>
-        <pre class="source-code hidden prettyprint" id="source-code-<%= control_id %>"><code class="language-ruby"><%= control.code.strip %></code></pre>
+        <input type="button" class="show-source-code" id="show-code-<%= CGI.escapeHTML(control_id) %>" value="Show Source Source"/>
+        <input type="button" class="hide-source-code hidden" id="hide-code-<%= CGI.escapeHTML(control_id) %>" value="Hide Source Source"/>
+        <pre class="source-code hidden prettyprint" id="source-code-<%= CGI.escapeHTML(control_id) %>"><code class="language-ruby"><%= CGI.escapeHTML(control.code.strip) %></code></pre>
       </td>
     </tr>
   <!-- TODO waiver data -->
