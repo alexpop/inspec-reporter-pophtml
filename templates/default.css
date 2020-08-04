@@ -227,6 +227,11 @@ table.info th {
   visibility: visible;
 }
 
+/* .tooltip:hover:after {
+  visibility: visible;
+  transition: opacity  0s linear 1s;
+} */
+
 .thl {
   width: 4em;
 }

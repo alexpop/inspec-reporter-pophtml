@@ -1,6 +1,10 @@
 var expanded_char = '▼';
 var collapsed_char = '▶';
 var shown_results = <%= max_results_per_control %>;
+var profile_controls = {};
+<% report_extras['profiles'].each do |key,value| %>
+profile_controls["controls-<%= key %>"] = { 'shown': <%= value['sums']['total'] %>, 'total': <%= value['sums']['total'] %> };
+<% end %>
 
 /* CSS primitives */
 function addCssClass(id, cls) {
@@ -14,14 +18,14 @@ function removeCssClass(id, cls) {
 }
 
 function hideElement(element) {
-  console.log('Hiding ' + element.id);
+  // console.log('Hiding ' + element.id);
   if (!element.className.includes(' hidden')) {
     element.className += (' hidden');
   }
 }
 
 function showElement(element) {
-  console.log('Showing ' + element.id);
+  // console.log('Showing ' + element.id);
   var classes = element.className.replace(' hidden','');
   element.className = classes;
 }
@@ -48,11 +52,17 @@ function handleSelectorChange(evt) {
   if (should_show) {
     for (i = 0; i < controls.length; i++) {
       showElement(controls[i]);
+      profile_controls[controls[i].parentElement.id]['shown']++;
     }
   } else {
     for (i = 0; i < controls.length; i++) {
       hideElement(controls[i]);
+      profile_controls[controls[i].parentElement.id]['shown']--;
     }
+  }
+  var controls_labels = document.getElementsByClassName("controls-label");
+  for (i = 0; i < controls_labels.length; i++) {
+    controls_labels[i].innerText = controls_labels[i].innerText[0] + 'Controls (' + profile_controls[controls_labels[i].id]['shown'] + ' / ' + profile_controls[controls_labels[i].id]['total'] + ')';
   }
 }
 
@@ -85,8 +95,19 @@ function controlsClicked(event) {
     }
     controls_label = controls_label.replaceAt(0, collapsed_char);
   } else {
+    // When Controls are expanded, only show the control that are "checked" in the selector
+    var failed_checked = document.getElementById("failed-checkbox").checked;
+    var passed_checked = document.getElementById("passed-checkbox").checked;
+    var skipped_checked = document.getElementById("skipped-checkbox").checked;
+    var waived_checked = document.getElementById("waived-checkbox").checked;
     for (i = 0; i < selectors.length; i++) {
-      showElement(selectors[i]);
+      var control_status = selectors[i].classList[1];
+      if ((failed_checked && control_status == 'control-status-failed') ||
+          (passed_checked && control_status == 'control-status-passed') ||
+          (skipped_checked && control_status == 'control-status-skipped') ||
+          (waived_checked && control_status == 'control-status-waived')) {
+        showElement(selectors[i]);
+      }
     }
     controls_label = controls_label.replaceAt(0, expanded_char);
   }
@@ -201,7 +222,8 @@ function  pageLoaded() {
     selectors[i].onchange = handleSelectorChange;
   }
   // wire up child profile checkbox
-  document.getElementById("child-profile-checkbox").onchange = handleChildProfileChange;
+  // document.getElementById("child-profile-checkbox").onchange = handleChildProfileChange;
+
   report_time = document.getElementById("report-time");
   var utc_date = new Date(report_time.textContent);
   var tz = new Date().toString().split(" ")[5];
