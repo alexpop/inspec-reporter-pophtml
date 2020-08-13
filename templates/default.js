@@ -228,7 +228,7 @@ function  pageLoaded() {
     selectors[i].onchange = handleSelectorChange;
   }
   // wire up child profile checkbox
-  // document.getElementById("child-profile-checkbox").onchange = handleChildProfileChange;
+  document.getElementById("child-profile-checkbox").onchange = handleChildProfileChange;
 
   report_time = document.getElementById("report-time");
   var utc_date = new Date(report_time.textContent);
