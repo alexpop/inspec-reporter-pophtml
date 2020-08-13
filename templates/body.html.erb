@@ -52,7 +52,7 @@ JSON_DATA=<%= report_json_data %>
 
       <table id="platform" class="info">
         <tr><th colspan=2><h4 id="platform-label"><div class="tooltip">Platform Information<span class="tooltiptext">Basic information about the platform being scanned and the software being used to do it.</span></div></h4></th></tr>
-        <tr class= "name"><th><div class="tooltip">Name<span class="tooltiptext">The codename of the platform identified as the target of this report.</span></div>:</th><td><%= CGI.escapeHTML(run_data.platform.name) %></td></tr>
+        <tr class= "name"><th><div class="tooltip">Name<span class="tooltiptext">The codename of the platform identified as the target of this report. If exec target has been specified, it's the operating system of the machine that executed the profile(s)</span></div>:</th><td><%= CGI.escapeHTML(run_data.platform.name) %></td></tr>
         <tr class= "release"><th><div class="tooltip">Release<span class="tooltiptext">The version of the platform identified as the target of this report.</span></div>:</th><td><%= CGI.escapeHTML(run_data.platform.release) %></td></tr>
         <tr class= "target"><th><div class="tooltip">Target<span class="tooltiptext">The target of this report. This can be local machine, a remote server, a could account, etc.</span></div>:</th><td><%= CGI.escapeHTML(run_data.platform.target) %></td></tr>
         <tr class= "date">
