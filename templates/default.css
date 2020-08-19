@@ -327,3 +327,7 @@ table.info th {
 .quoted-resource {
   text-decoration: underline;
 }
+
+.quoted-condition {
+  font-weight: bold;
+}

@@ -3,16 +3,31 @@
 %>
 
 <div class="result results-<%= profile.sha256 %>-<%= control_id %> <%= result_index < max_results_per_control ? "" : "hidden" %>" id="<%= result_id %>">
-  <h4 class="resource-title"><code>
-  <%=
-    if (result.resource_title.to_s =~ /(.*?')(.*?)('.*)/)
-      CGI.escapeHTML("#{$1}")+'<span class="quoted-resource">'+CGI.escapeHTML("#{$2}")+'</span>'+CGI.escapeHTML("#{$3}")
-    else
-      CGI.escapeHTML(result.resource_title.to_s)
-    end
-  %></code></h4>
+  <h4 class="resource-title">
+    <code>
+      <%=
+        if (result.resource_title.to_s =~ /(.*?['"])(.*?)(['"].*)/)
+          CGI.escapeHTML("#{$1}")+'<span class="quoted-resource">'+CGI.escapeHTML("#{$2}")+'</span>'+CGI.escapeHTML("#{$3}")
+        else
+          CGI.escapeHTML(result.resource_title.to_s)
+        end
+      %>
+    </code>
+  </h4>
   <table class="result-metadata info">
-    <tr class="expectation_message"><th class="thl">Condition:</th><td><code><%= CGI.escapeHTML(result.expectation_message) %></code></td></tr>
+    <tr class="expectation_message"><th class="thl">Condition:</th><td>
+      <code>
+        <%=
+          if (result.expectation_message.to_s =~ /(.*?['"])(.*?)(['"].*)/)
+            CGI.escapeHTML("#{$1}")+'<span class="quoted-condition">'+CGI.escapeHTML("#{$2}")+'</span>'+CGI.escapeHTML("#{$3}")
+          elsif (result.expectation_message.to_s =~ /(.*)(to be|to eq|to match|to cmp|expected to)( .*)/)
+            CGI.escapeHTML("#{$1}#{$2}")+'<span class="quoted-condition">'+CGI.escapeHTML("#{$3}")+'</span>'
+          else
+            CGI.escapeHTML(result.expectation_message.to_s)
+          end
+        %>
+      </code>
+    </td></tr>
     <tr class="status"><th class="thl">Status:</th><td><span class="status-<%= result.status %>"><%= CGI.escapeHTML(result.status.capitalize) %></span></td></tr>
     <% if result.status == "failed" %>
     <tr class="fail_message"><th class="thl">Fail Message:</th><td><code><%= CGI.escapeHTML(result.message) %></code></td></tr>
