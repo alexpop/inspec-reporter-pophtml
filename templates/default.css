@@ -328,6 +328,6 @@ table.info th {
   text-decoration: underline;
 }
 
-.quoted-condition {
+.quoted-condition, .not-condition {
   font-weight: bold;
 }

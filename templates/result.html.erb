@@ -18,13 +18,16 @@
     <tr class="expectation_message"><th class="thl">Condition:</th><td>
       <code>
         <%=
-          if (result.expectation_message.to_s =~ /(.*?['"])(.*?)(['"].*)/)
-            CGI.escapeHTML("#{$1}")+'<span class="quoted-condition">'+CGI.escapeHTML("#{$2}")+'</span>'+CGI.escapeHTML("#{$3}")
-          elsif (result.expectation_message.to_s =~ /(.*)(to be|to eq|to match|to cmp|expected to)( .*)/)
-            CGI.escapeHTML("#{$1}#{$2}")+'<span class="quoted-condition">'+CGI.escapeHTML("#{$3}")+'</span>'
-          else
-            CGI.escapeHTML(result.expectation_message.to_s)
+          expectation = result.expectation_message.to_s
+          if (expectation =~ /(.*?['"])(.*?)(['"].*)/)
+            expectation = CGI.escapeHTML("#{$1}")+'<span class="quoted-condition">'+CGI.escapeHTML("#{$2}")+'</span>'+CGI.escapeHTML("#{$3}")
+          elsif (result.expectation_message.to_s =~ /(.*)(to be|to eq|to match|to cmp|expected to) (.*)/)
+            expectation = CGI.escapeHTML("#{$1}#{$2}")+' <span class="quoted-condition">'+CGI.escapeHTML("#{$3}")+'</span>'
           end
+          if (expectation =~ /(.*)(expected not to)(.*)/)
+            expectation = "#{$1}expected <span class=\"not-condition\">not</span> to#{$3}"
+          end
+          expectation
         %>
       </code>
     </td></tr>
