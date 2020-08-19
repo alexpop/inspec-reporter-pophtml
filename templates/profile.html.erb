@@ -11,7 +11,7 @@
     <% if profile.summary %>
     <tr class="profile-summary"><th class="thl">Summary:</th><td><%= CGI.escapeHTML(profile.summary) %></td></tr>
     <% end %>
-    <tr class="profile-summary"><th class="thl"><div class="tooltip">Status<span class="tooltiptext">The overall status of the profile taking into account the status of its controls, ran or waived (ignored).</span></div>:</th><td><b><span class="status-<%= report_extras['profiles'][profile.sha256]['status'] %>"><%= report_extras['profiles'][profile.sha256]['status'].capitalize %></span></b></td></tr>
+    <tr class="profile-summary"><th class="thl"><div class="tooltip">Status<span class="tooltiptext">The overall status of the profile taking into account the status of its controls, ran or waived (ignored).</span></div>:</th><td><b><span class="status-<%= report_extras['profiles'][profile.sha256]['status'] %>"><%= CGI.escapeHTML(report_extras['profiles'][profile.sha256]['status'].capitalize) %></span></b></td></tr>
     <% if profile.status == 'skipped' && profile.status_message %>
     <tr class="profile-skip-message"><th class="thl"><span class="status-skipped">Skip Message:</span></th><td><%= CGI.escapeHTML(profile.status_message) %></td></tr>
     <% end %>

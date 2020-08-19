@@ -34,7 +34,7 @@
   </code></h3>
   <table class="control-metadata info">
     <tr class="control-id"><th class="thl"><div class="tooltip">Id<span class="tooltiptext">The unique control id within this profile.</span></div>:</th><td><%= CGI.escapeHTML(control.id) %></td></tr>
-    <tr class="status"><th class="thl"><div class="tooltip">Status<span class="tooltiptext">The overall status of the control taking into account the status of its results and any waivers (ignore conditions) applied for it.</span></div>:</th><td><b><span class="status-<%= control_status %>"><%= control_status.capitalize %></span></b>
+    <tr class="status"><th class="thl"><div class="tooltip">Status<span class="tooltiptext">The overall status of the control taking into account the status of its results and any waivers (ignore conditions) applied for it.</span></div>:</th><td><b><span class="status-<%= control_status %>"><%= CGI.escapeHTML(control_status.capitalize) %></span></b>
       <% if control_status == 'waived' %>
         <%= control.waiver_data.expiration_date.nil? ? '' : "<i>until</i> <span class=\"waiver-expiration\">#{CGI.escapeHTML(control.waiver_data.expiration_date.to_s)}</span>" %>
         <%= control.waiver_data.justification.nil? ? '' : "<i>with justification</i> <span class=\"waiver-justification\">#{CGI.escapeHTML(control.waiver_data.justification)}</span>" %>
@@ -45,7 +45,7 @@
       <tr class="desc"><th class="thl"><div class="tooltip">Desc<span class="tooltiptext">The description of the control as defined in the profile.</span></div>:</th><td><%= CGI.escapeHTML(control.desc) %></td></tr>
     <% end %>
     <% if control.impact %>
-      <tr class="impact impact-<%= impact_level %>"><th class="thl"><div class="tooltip">Impact<span class="tooltiptext">The criticality of the control expressed as a number between 0.0 and 1.0, with a value &lt; 0.4 being considered 'LOW', a value &lt; 0.7 being considered 'MEDIUM' otherwise 'HIGH'.</span></div>:</th><td><%= control.impact %></td></tr>
+      <tr class="impact impact-<%= impact_level %>"><th class="thl"><div class="tooltip">Impact<span class="tooltiptext">The criticality of the control expressed as a number between 0.0 and 1.0, with a value &lt; 0.4 being considered 'LOW', a value &lt; 0.7 being considered 'MEDIUM' otherwise 'HIGH'.</span></div>:</th><td><%= CGI.escapeHTML(control.impact.to_s) %></td></tr>
     <% end %>
     <% unless control.tags.empty? %>
       <tr class="tags">
