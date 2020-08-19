@@ -6,7 +6,7 @@
   <h4 class="resource-title"><code>
   <%=
     if (result.resource_title.to_s =~ /(.*?')(.*?)('.*)/)
-      CGI.escapeHTML("#{$1}")+'<u>'+CGI.escapeHTML("#{$2}")+'</u>'+CGI.escapeHTML("#{$3}")
+      CGI.escapeHTML("#{$1}")+'<span class="quoted-resource">'+CGI.escapeHTML("#{$2}")+'</span>'+CGI.escapeHTML("#{$3}")
     else
       CGI.escapeHTML(result.resource_title.to_s)
     end

@@ -323,3 +323,7 @@ table.info th {
   padding-left: 20px;
   font-style: italic;
 }
+
+.quoted-resource {
+  text-decoration: underline;
+}
