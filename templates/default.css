@@ -330,4 +330,5 @@ table.info th {
 
 .quoted-condition, .not-condition {
   font-weight: bold;
+  color: #5f2a2a;
 }
