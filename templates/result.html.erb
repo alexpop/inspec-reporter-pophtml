@@ -19,10 +19,10 @@
       <code>
         <%=
           expectation = result.expectation_message.to_s
-          if (expectation =~ /(.*?['"])(.*?)(['"].*)/)
-            expectation = CGI.escapeHTML("#{$1}")+'<span class="quoted-condition">'+CGI.escapeHTML("#{$2}")+'</span>'+CGI.escapeHTML("#{$3}")
-          elsif (result.expectation_message.to_s =~ /(.*)(to be|to eq|to match|to cmp|expected to) (.*)/)
+          if (result.expectation_message.to_s =~ /(.*)(to be in|to be|to eq|to match|to cmp|expected to) (.*)/)
             expectation = CGI.escapeHTML("#{$1}#{$2}")+' <span class="quoted-condition">'+CGI.escapeHTML("#{$3}")+'</span>'
+          elsif (expectation =~ /(.*?['"])(.*?)(['"].*)/)
+            expectation = CGI.escapeHTML("#{$1}")+'<span class="quoted-condition">'+CGI.escapeHTML("#{$2}")+'</span>'+CGI.escapeHTML("#{$3}")
           end
           if (expectation =~ /(.*)(expected not to)(.*)/)
             expectation = "#{$1}expected <span class=\"not-condition\">not</span> to#{$3}"
