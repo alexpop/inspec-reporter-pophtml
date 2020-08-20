@@ -33,7 +33,7 @@ module InspecPlugins::PopHtmlReporter
 
       calculate_controls_sums(report_extras)
       calculate_statuses(report_extras)
-      sort_and_truncate_control_results(max_results_per_control)
+      sort_control_results(report_extras)
 
       report_json_data = report_extras.to_json
 
@@ -163,7 +163,7 @@ module InspecPlugins::PopHtmlReporter
       return status
     end
 
-    def sort_and_truncate_control_results(max_results)
+    def sort_control_results(report_extras)
       run_data['profiles'].each do |profile|
         next unless run_data['controls'].is_a?(Array)
         profile['controls'].each do |control|
@@ -173,11 +173,16 @@ module InspecPlugins::PopHtmlReporter
             result['backtrace'] = result_index
           end
           res = control['results']
-          truncated = { failed: 0, skipped: 0, passed: 0 }
-          res.sort_by! do |r|
-            # Replacing "skipped" with "kipped" for the sort logic so that
-            # the results are sorted in this order: failed, skipped, passed
-            r['status'] == 'skipped' ? 'kipped' : r['status']
+          results_sum = report_extras['profiles'][profile.sha256]['controls'][control.id]['sums']
+          # Don't sort if all the results have the same status
+          unless results_sum['total'] == results_sum['passed'] ||
+             results_sum['total'] == results_sum['failed'] ||
+             results_sum['total'] == results_sum['skipped']
+            res.sort_by! do |r|
+              # Replacing "skipped" with "kipped" for the sort logic so that
+              # the results are sorted in this order: failed, skipped, passed
+              r['status'] == 'skipped' ? 'kipped' : r['status']
+            end
           end
         end
       end
