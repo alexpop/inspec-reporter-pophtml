@@ -2,7 +2,7 @@
   result_id = 'r-' + '%07d' % result.backtrace
 %>
 
-<div class="result results-<%= profile.sha256 %>-<%= control_id %> <%= result_index < max_results_per_control ? "" : "hidden" %>" id="<%= result_id %>">
+<div class="result results-<%= profile.sha256 %>-<%= control_id %> <%= result_index < max_results_per_this_control ? "" : "hidden" %>" id="<%= result_id %>">
   <h4 class="resource-title">
     <code>
       <%=

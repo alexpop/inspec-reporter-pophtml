@@ -33,6 +33,7 @@ module InspecPlugins::PopHtmlReporter
 
       calculate_controls_sums(report_extras)
       calculate_statuses(report_extras)
+      sort_controls(report_extras)
       sort_control_results(report_extras)
 
       report_json_data = report_extras.to_json
@@ -87,7 +88,10 @@ module InspecPlugins::PopHtmlReporter
                   control_result_stats[result.status] += 1
                 end
                 control_result_stats['total'] = control_result_stats['failed'] + control_result_stats['passed'] + control_result_stats['skipped']
-                extras['profiles'][profile.sha256]['controls'][control.id] = { 'sums' => control_result_stats }
+                extras['profiles'][profile.sha256]['controls'][control.id] = {
+                  'sums' => control_result_stats,
+                  'status' => control_status(control, control_result_stats)
+                }
               end
               profile_control_stats[control_status(control, control_result_stats)] += 1
             end
@@ -163,6 +167,34 @@ module InspecPlugins::PopHtmlReporter
       return status
     end
 
+    # Helper function to help sort results or controls by
+    # status in this order: failed, skipped, waived, passed
+    def sort_order(status)
+      case status
+      when "failed"
+        1
+      when "skipped"
+        2
+      when "waived"
+        3
+      when "passed"
+        4
+      else
+        5
+      end
+    end
+
+    def sort_controls(report_extras)
+      run_data['profiles'].each do |profile|
+        next unless run_data['controls'].is_a?(Array)
+        profile['controls'].sort_by! do |control|
+          status = report_extras['profiles'][profile.sha256]['controls'][control.id]['status']
+          # Sort by status and then by impact (desc)
+          [sort_order(status), -control.impact]
+        end
+      end
+    end
+
     def sort_control_results(report_extras)
       run_data['profiles'].each do |profile|
         next unless run_data['controls'].is_a?(Array)
@@ -179,9 +211,8 @@ module InspecPlugins::PopHtmlReporter
              results_sum['total'] == results_sum['failed'] ||
              results_sum['total'] == results_sum['skipped']
             res.sort_by! do |r|
-              # Replacing "skipped" with "kipped" for the sort logic so that
-              # the results are sorted in this order: failed, skipped, passed
-              r['status'] == 'skipped' ? 'kipped' : r['status']
+              # Sort the control results in this order: failed, skipped, passed
+              sort_order(r['status'])
             end
           end
         end

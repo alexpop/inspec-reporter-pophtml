@@ -93,7 +93,7 @@ String.prototype.replaceAt = function(index, replacement) {
 
 function controlsClicked(event) {
   var selectors = document.querySelectorAll('.' + event.id.replace('label-', ''));
-  console.log(event.id + ' has ' + selectors.length + ' controls, collapsing...');
+  console.log('controlsClicked, '+ event.id + ' has ' + selectors.length + ' controls');
   var controls_label = event.innerText;
   if (controls_label[0] == expanded_char) {
     for (i = 0; i < selectors.length; i++) {
@@ -122,7 +122,7 @@ function controlsClicked(event) {
 
 function resultsClicked(event) {
   var selectors = document.querySelectorAll('.' + event.id);
-  console.log(event.id + ' has ' + selectors.length + ' results, collapsing...');
+  console.log('resultsClicked, ' + event.id + ' has ' + selectors.length + ' results');
   var results_label = event.innerText;
   if (results_label[0] == expanded_char) {
     for (i = 0; i < selectors.length; i++) {
