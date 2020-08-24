@@ -18,10 +18,10 @@ you@machine $ inspec plugin install inspec-reporter-pophtml
 To generate an HTML report using this plugin and save the output to a file named `report.html`, run:
 
 ```
-you@machine $ inspec exec some_profile --reporter pophtml:report.html
+you@machine $ inspec exec some_profile --reporter pophtml:/tmp/report.html
 ```
 
-Note the `2` in the reporter name. If you omit it and run `--reporter html` instead, you will run the legacy RSpec HTML reporter.
+Note the `pophtml` in the reporter name.
 
 ## Configuring the Plugin
 
@@ -35,19 +35,34 @@ For example:
   "plugins": {
     "inspec-reporter-pophtml": {
       "alternate_js_file":"/var/www/js/my-javascript.js",
-      "alternate_css_file":"/var/www/css/my-style.css"
+      "alternate_css_file":"/var/www/css/my-style.css",
+      "report_uuid": "f3f640f6-8a64-4aaa-b142-555555555555"
     }
   }
 }
 ```
 
-### alternate\_css\_file
+See below all customization options available:
 
-Specifies the full path to the location of a CSS file that will be read and inlined into the HTML report. The default CSS will not be included.
+| Option               |      Description      |
+|----------------------|:-------------:|
+| `alternate_js_file`  | Full path to a javascript file instead of the default `default.js` that will be inlined into the HTML report. The default JavaScript will not be included. The JavaScript file should implement at least a `pageLoaded()` function, which will be called by the `onload` event of the HTML `body` element. |
+| `alternate_css_file` | Full path to a stylesheet file instead of the default `default.css` that will be inlined into the HTML report.  |
+| `alternate_preety_js_file`  | Full path to a prettify javascript file instead of the default `code_prettify.js` |
+| `alternate_preety_css_file` | Full path to a prettify stylesheet file instead of the default `code_prettify_dark.css` |
+| `max_results_per_control`   | Number of results per control to show when results are expanded. Defaults to 3 |
+| `report_id` | Give an ID to this report, otherwise a random UUID will be generated. |
+| `node_id`   | Give an ID to this node, defaults to 'NOT_SPECIFIED'. |
+| `node_name` | Give a name to this node, defaults to 'NOT_SPECIFIED'. |
+| `tags`      | Array of tags for this report, defaults to ['NOT','SPECIFIED'] |
 
-### alternate\_js\_file
+### How to use a config json
 
-Specifies the full path to the location of a JavaScript file that will be read and inlined into the HTML report. The default JavaScript will not be included. The JavaScript file should implement at least a `pageLoaded()` function, which will be called by the `onload` event of the HTML `body` element.
+A sample configuration file `sample-config.json` can be found in this repository. Here's an example exec with a config file where you can customize some of the defaults in the plugin.
+
+```json
+you@machine $ inspec exec some_profile --reporter pophtml:/tmp/report.html --config sample-config.json
+```
 
 ### TODO
 

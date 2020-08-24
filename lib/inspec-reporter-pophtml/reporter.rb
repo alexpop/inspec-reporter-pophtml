@@ -14,15 +14,19 @@ module InspecPlugins::PopHtmlReporter
       cfg = Inspec::Config.cached.fetch_plugin_config("inspec-reporter-pophtml")
       js_path = cfg[:alternate_js_file] || (template_path + "/default.js")
       css_path = cfg[:alternate_css_file] || (template_path + "/default.css")
-      preety_js_path = cfg[:alternate_preety_js_file] || (template_path + "/run_prettify.js")
-      preety_css_path = cfg[:alternate_preety_js_file] || (template_path + "/run_prettify_dark.css")
+      preety_js_path = cfg[:alternate_preety_js_file] || (template_path + "/code_prettify.js")
+      preety_css_path = cfg[:alternate_preety_css_file] || (template_path + "/code_prettify_dark.css")
       max_results_per_control = cfg[:max_results_per_control] || 3
+      report_id = cfg[:report_id] || SecureRandom.uuid
+      node_id = cfg[:node_id] || 'NOT_SPECIFIED'
+      node_name = cfg[:node_name] || 'NOT_SPECIFIED'
+      report_tags = cfg[:tags] || ['NOT','SPECIFIED']
 
       report_extras = {
-        'report_id' => SecureRandom.uuid,
-        'node_id'   => 'NOT_SPECIFIED',
-        'node_name' => 'NOT_SPECIFIED',
-        'tags'      => ['NOT','SPECIFIED'],
+        'report_id' => report_id,
+        'node_id'   => node_id,
+        'node_name' => node_name,
+        'tags'      => report_tags,
         'profiles'  => {},
         'sums'      => {},
         'status'    => '',

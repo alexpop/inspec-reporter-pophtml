@@ -1,0 +1,10 @@
+{
+  "version": "1.2",
+  "plugins": {
+    "inspec-reporter-pophtml": {
+      "report_uuid": "f3f640f6-8a64-4aaa-b142-555555555555",
+      "node_name": "Hello World node!",
+      "max_results_per_control": 2
+    }
+  }
+}

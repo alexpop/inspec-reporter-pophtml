@@ -7,7 +7,7 @@ JSON_DATA=<%= report_json_data %>
 
 <html lang="en">
   <head>
-    <title><%= Inspec::Dist::PRODUCT_NAME %> report</title>
+    <title><%= Inspec::Dist::PRODUCT_NAME %> report (pophtml)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
 /* Must inline all CSS files, this is a single-file output that may be airgapped */
@@ -61,6 +61,12 @@ JSON_DATA=<%= report_json_data %>
           </th><td><span id="report-time"><%= CGI.escapeHTML(report_extras['end_time']) %></span></td>
         </tr>
         <tr class= "version"><th><div class="tooltip"><%= CGI.escapeHTML(Inspec::Dist::PRODUCT_NAME.gsub(/Chef\s*/, "")) %><span class="tooltiptext">The version of <%= CGI.escapeHTML(Inspec::Dist::PRODUCT_NAME) %> that was used to create this report.</span></div>:</th><td>v<%= CGI.escapeHTML(run_data.version) %></td></tr>
+      </table>
+
+      <table id="node-info" class="info">
+        <tr><th colspan=2><h4 id="node-label"><div class="tooltip">Node Information<span class="tooltiptext">Identifiable information about the node or target of this scan.</span></div></h4></th></tr>
+        <tr class= "node_name"><th>Name:</th><td><%= CGI.escapeHTML(node_name) %></td></tr>
+        <tr class= "node_id"><th>ID:</th><td><%= CGI.escapeHTML(node_id) %></td></tr>
       </table>
     </div>
 

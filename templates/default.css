@@ -179,7 +179,7 @@ table.info th {
   margin-bottom: 0px;
 }
 
-.inspec-summary #platform, .inspec-summary #statistics {
+.inspec-summary #platform, .inspec-summary #statistics, .inspec-summary #node-info {
   display: inline;
 }
 
