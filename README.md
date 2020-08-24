@@ -47,14 +47,14 @@ See below all customization options available:
 | Option               |      Description      |
 |----------------------|:-------------:|
 | `alternate_js_file`  | Full path to a javascript file instead of the default `default.js` that will be inlined into the HTML report. The default JavaScript will not be included. The JavaScript file should implement at least a `pageLoaded()` function, which will be called by the `onload` event of the HTML `body` element. |
-| `alternate_css_file` | Full path to a stylesheet file instead of the default `default.css` that will be inlined into the HTML report.  |
+| `alternate_css_file` | Full path to a stylesheet file instead of the default `default.css` that will be inlined into the HTML report. |
 | `alternate_preety_js_file`  | Full path to a prettify javascript file instead of the default `code_prettify.js` |
 | `alternate_preety_css_file` | Full path to a prettify stylesheet file instead of the default `code_prettify_dark.css` |
 | `max_results_per_control`   | Number of results per control to show when results are expanded. Defaults to 3 |
 | `report_id` | Give an ID to this report, otherwise a random UUID will be generated. |
-| `node_id`   | Give an ID to this node, defaults to 'NOT_SPECIFIED'. |
-| `node_name` | Give a name to this node, defaults to 'NOT_SPECIFIED'. |
-| `tags`      | Array of tags for this report, defaults to ['NOT','SPECIFIED'] |
+| `node_id`   | Give an ID to this node, defaults to `"NOT_SPECIFIED"` |
+| `node_name` | Give a name to this node, defaults to `"NOT_SPECIFIED"` |
+| `tags`      | Array of tags for this report, defaults to `["NOT","SPECIFIED"]` |
 
 ### How to use a config json
 
