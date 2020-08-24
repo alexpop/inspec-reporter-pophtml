@@ -191,7 +191,7 @@ table.info th {
   width: 180px;
 }
 
-#statistics-label, #platform-label {
+#statistics-label, #platform-label, #node-label {
   text-align: left;
   margin-block-start: 0.3em;
 }
