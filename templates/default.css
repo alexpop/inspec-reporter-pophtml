@@ -332,3 +332,11 @@ table.info th {
   font-weight: bold;
   color: #5f2a2a;
 }
+
+.node_name_value_default {}
+.node_name_value {
+  font-weight: bold;
+  color: #5f2a2a;
+}
+
+.node_id_value_default {}

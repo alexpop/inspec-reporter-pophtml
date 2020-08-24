@@ -65,8 +65,8 @@ JSON_DATA=<%= report_json_data %>
 
       <table id="node-info" class="info">
         <tr><th colspan=2><h4 id="node-label"><div class="tooltip">Node Information<span class="tooltiptext">Identifiable information about the node or target of this scan.</span></div></h4></th></tr>
-        <tr class= "node_name"><th>Name:</th><td><%= CGI.escapeHTML(node_name) %></td></tr>
-        <tr class= "node_id"><th>ID:</th><td><%= CGI.escapeHTML(node_id) %></td></tr>
+        <tr class="node_name"><th>Name:</th><td class="<%= node_name == 'NOT_SPECIFIED' ? 'node_name_value_default' : 'node_name_value'  %>"><%= CGI.escapeHTML(node_name) %></td></tr>
+        <tr class="node_id"><th>ID:</th><td class="<%= node_id == 'NOT_SPECIFIED' ? 'node_id_value_default' : 'node_id_value'  %>"><%= CGI.escapeHTML(node_id) %></td></tr>
       </table>
     </div>
 
