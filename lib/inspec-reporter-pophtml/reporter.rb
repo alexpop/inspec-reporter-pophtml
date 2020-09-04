@@ -19,8 +19,23 @@ module InspecPlugins::PopHtmlReporter
       max_results_per_control = cfg[:max_results_per_control] || 3
       report_id = cfg[:report_id] || SecureRandom.uuid
       node_id = cfg[:node_id] || 'NOT_SPECIFIED'
-      node_name = cfg[:node_name] || 'NOT_SPECIFIED'
       report_tags = cfg[:tags] || ['NOT','SPECIFIED']
+      node_name = cfg[:node_name]
+      node_name_label = 'Name'
+      unless node_name
+        uri = URI.parse(run_data.platform.target.to_s)
+        case uri.scheme
+        when "local"
+          node_name_label = 'Hostname'
+          require 'socket'
+          node_name = Socket.gethostname
+        when 'ssh' || 'winrm'
+          node_name_label = 'Host'
+          node_name = uri.host
+        else
+          node_name = 'NOT_SPECIFIED'
+        end
+      end
 
       report_extras = {
         'report_id' => report_id,
