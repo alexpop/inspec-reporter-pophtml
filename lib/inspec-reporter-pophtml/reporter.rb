@@ -52,7 +52,7 @@ module InspecPlugins::PopHtmlReporter
 
       calculate_controls_sums(report_extras)
       calculate_statuses(report_extras)
-      sort_controls(report_extras)
+      sort_controls_by_status(report_extras)
       sort_control_results(report_extras)
 
       report_json_data = report_extras.to_json
@@ -203,7 +203,7 @@ module InspecPlugins::PopHtmlReporter
       end
     end
 
-    def sort_controls(report_extras)
+    def sort_controls_by_status(report_extras)
       run_data['profiles'].each do |profile|
         next unless run_data['controls'].is_a?(Array)
         profile['controls'].sort_by! do |control|
